@@ -58,7 +58,7 @@ class HomePage extends StatelessWidget {
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "Hello Anass. ",
+                          "Hello Anass.",
                           style: TextStyle(
                             color: Colors.green,
                             fontWeight: FontWeight.bold,
