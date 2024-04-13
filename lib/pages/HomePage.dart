@@ -71,7 +71,7 @@ class HomePage extends StatelessWidget {
             SizedBox(
               width: 350,
               height: 350,
-              child: ListView(s
+              child: ListView(
                 children: [ 
                   Expanded(
                     child: Container(
