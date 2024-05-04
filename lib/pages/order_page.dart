@@ -5,11 +5,13 @@ class OrdersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+   return Scaffold(
+      backgroundColor: Colors.brown[100],
       appBar: AppBar(
+        elevation: 0,
         title: const Padding(
           padding: EdgeInsets.only(top: 10),
-          child: Text("Order Page",
+          child: Text("Make Order Page",
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -19,6 +21,47 @@ class OrdersPage extends StatelessWidget {
         backgroundColor: Colors.brown,
         centerTitle: true,
       ),
+      body: Column(
+        children: [
+          Expanded(
+            flex: 11,
+            child: Padding(
+              padding: const EdgeInsets.all(25.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  color: Colors.brown[300]
+                ),
+                child: ListView.builder(
+                  itemBuilder: (context, index) => null,
+                 
+                )
+              ),
+            ),
+          ),
+          Expanded(
+            child: Container(
+              alignment: Alignment.centerRight,
+              padding: EdgeInsets.only(right: 80),
+              child: Text(
+                "Create New Order",
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  color: Colors.brown[900]
+                ),
+                ),
+            ),
+          )
+        ]
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => createNewOrder(),
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.brown,
+        child: Icon(Icons.add),
+      )
     );
   }
+  
+  createNewOrder() {}
 }

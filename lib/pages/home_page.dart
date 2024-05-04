@@ -134,7 +134,7 @@ class HomePage extends StatelessWidget {
                   ),
                   SizedBox(height: 10.0),
                   GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, '/makeOrder'),
+                    onTap: () => Navigator.pushNamed(context, '/suppliers'),
                     child: Container(
                       //Button 3
                       height: 50,
@@ -146,7 +146,7 @@ class HomePage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "Make an Order",
+                              "Suppliers",
                               style: TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.bold),
                             ),
