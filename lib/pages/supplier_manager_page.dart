@@ -1,9 +1,10 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import "dart:io";
 
+import "package:app_stocatge/models/item.dart";
 import "package:app_stocatge/widgets/Suppliers/new_supplier_box.dart";
 import "package:app_stocatge/widgets/Suppliers/supplier_tile.dart";
+import "package:app_stocatge/widgets/new_item_box.dart";
 import "package:flutter/material.dart";
 import '../models/supplier.dart';
 import '../repositories/supplier_repository.dart';
@@ -51,10 +52,27 @@ class _SupplierManagerState extends State<SupplierManager> {
     Navigator.of(context).pop();
   }
 
-  void addItemToSupplier(int index) {
-
+  void addItemToSupplier(int index, Map<String, String> newItemData) {
+    String id = newItemData['id'].toString();
+    String name = newItemData['name'].toString();
+    double price = double.parse(newItemData['price'].toString());
+    Item newItem = Item(productId: id, productName: name, unitPrice: price);
+    setState(() {
+      repository.allSuppliers.elementAt(index).setNewItem(newItem);//repository.allSuppliers.elementAt(index).getItems();
+    });
+    repository.allSuppliers.elementAt(index).printItems();
+    Navigator.of(context).pop();
   }
-
+  void createNewItem(int index){
+     showDialog(
+      context: context, 
+      builder: (context) {
+        return NewItemBox(
+          onSave: (newItemData) => addItemToSupplier(index, newItemData),
+        );
+      },
+      );
+  }
   void modifySup(int index) {
     showDialog(
       context: context, 
@@ -117,7 +135,7 @@ class _SupplierManagerState extends State<SupplierManager> {
                       active: repository.allSuppliers[index].isActive,
                       setInactive: (context) => setInactive(index),
                       modifySupplier: (context) => modifySup(index),
-                      addItem: (context) => addItemToSupplier(index),
+                      addItem: (context) => createNewItem(index),
                     );
                   },
                 )

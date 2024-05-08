@@ -1,5 +1,5 @@
 
-import 'package:app_stocatge/models/orderItem.dart';
+import 'package:app_stocatge/models/item.dart';
 
 class Supplier {
   String name;
@@ -11,7 +11,7 @@ class Supplier {
   String ?country;
   String ?phoneNumber;
   bool active;
-  List<OrderItem>? items;
+  List<Item> items = List.empty(growable: true);//List<Item>.filled(500, Null as Item ,growable: true);
 
   Supplier({
     required this.name,
@@ -23,7 +23,6 @@ class Supplier {
     this.country,
     this.phoneNumber,
     this.active = true,
-    this.items,
   });
 
   void setName(String name){
@@ -59,7 +58,14 @@ class Supplier {
   String? get getCountry => country;
   String? get getPhone => phoneNumber;
   bool get isActive => active;
-
+  void printItems(){
+    print(items);
+  }
+  void setNewItem(Item newItem){
+    print("Adding new ittem");
+    items.add(newItem);
+    print("Item " + newItem.toString() + " added. ");
+  }
 
   Map<String, dynamic> toMap() {
     return {
