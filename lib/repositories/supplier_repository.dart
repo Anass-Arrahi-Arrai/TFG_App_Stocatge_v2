@@ -1,27 +1,61 @@
 // ignore_for_file: use_function_type_syntax_for_parameters
 
+import 'package:app_stocatge/repositories/item_repository.dart';
+import 'package:hive/hive.dart';
+
 import '../models/supplier.dart';
 
 class SupplierRepository {
-// La lista interna de proveedores. Podría ser reemplazada con una base de datos real en el futuro.
-  final List<Supplier> _suppliers = [];
 
-  // Obtener tamaño lista
-  int get getLength => _suppliers.length;
-  // Obtener todos los proveedores.
-  List<Supplier> get allSuppliers => _suppliers;
+  List<Supplier> _suppliers = [];
+  late Box<Supplier> boxSuppliers;
+  late ItemRepository iRepository;
 
-  // Añadir un nuevo proveedor.
-  void addSupplier(Supplier supplier) {
-    _suppliers.add(supplier);
+  SupplierRepository(){
+    init();
+  }
+  
+  void init() {
+    iRepository = ItemRepository();
+    boxSuppliers = Hive.box<Supplier>("supplierBox");
+    loadData(); 
+  }
+  void loadData() {
+    _suppliers = allSuppliersFromDb; // Carga los suppliers desde Hive
+  }
+  // Get all suppliers from db
+  List<Supplier> get allSuppliersFromDb => boxSuppliers.values.toList();
+  //Add supplier to db
+  void addSupplierToDb(Supplier supplier) async {
+    await boxSuppliers.add(supplier);
+  }
+  // Update db supplier 
+  void updateSupplierOnDb(Supplier oldSupplier, Supplier newSupplier) async {
+    final supplierKey = boxSuppliers.values.toList().indexOf(oldSupplier);
+    if (supplierKey != -1) {
+      await boxSuppliers.putAt(supplierKey, newSupplier);
+    }
   }
 
-  // Eliminar un proveedor.
+  int get getLength => _suppliers.length;
+  // Get all suppliers
+  List<Supplier> get allSuppliers => _suppliers;
+  Supplier getSupplier(int idx){
+    return _suppliers.elementAt(idx);
+  }
+ 
+  // Add new Supplier
+  void addSupplier(Supplier supplier) {
+    _suppliers.add(supplier);
+    iRepository.items[supplier.getName] = List.empty(growable: true);
+  }
+
+  // "Remove" supplier
   void removeSupplier(Supplier supplier) {
     _suppliers.remove(supplier);
   }
 
-  // Actualizar un proveedor.
+  // Update Supplier
   void updateSupplier(Supplier oldSupplier, Supplier newSupplier) {
     final index = _suppliers.indexOf(oldSupplier);
     if (index != -1) {
@@ -29,9 +63,9 @@ class SupplierRepository {
     }
   }
 
-  // Buscar proveedores por algún criterio, como el nombre.
-  List<Supplier> searchSuppliers(String query) {
-    return _suppliers.where((supplier) => supplier.name.contains(query)).toList();
+  // Search supplier by name
+  List<Supplier> searchSuppliers(String name) {
+    return _suppliers.where((supplier) => supplier.name.contains(name)).toList();
   }
  
 }

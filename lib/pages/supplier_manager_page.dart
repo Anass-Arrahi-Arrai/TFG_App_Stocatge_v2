@@ -2,6 +2,7 @@
 
 
 import "package:app_stocatge/models/item.dart";
+import "package:app_stocatge/repositories/item_repository.dart";
 import "package:app_stocatge/widgets/Suppliers/new_supplier_box.dart";
 import "package:app_stocatge/widgets/Suppliers/supplier_tile.dart";
 import "package:app_stocatge/widgets/new_item_box.dart";
@@ -10,12 +11,8 @@ import '../models/supplier.dart';
 import '../repositories/supplier_repository.dart';
 
 class SupplierManager extends StatefulWidget {
-  /*final List suppliers = [
-    ["Discongel", true],
-    ["Xavi Llopart", true],
-    ["Busi Cafe Arabo", false],
-  ];*/
-  SupplierManager({super.key});
+  
+  const SupplierManager({super.key});
   
   @override
   State<SupplierManager> createState() => _SupplierManagerState();
@@ -24,7 +21,8 @@ class SupplierManager extends StatefulWidget {
 class _SupplierManagerState extends State<SupplierManager> {
   
   final SupplierRepository repository = SupplierRepository();
-  
+  final ItemRepository itemRepo = ItemRepository();
+
   void getNewSuplierToReplace(Map<String, String> newSupplierData, int index){
     String name = newSupplierData['name'].toString();
     String nif = newSupplierData['nif'].toString();
@@ -32,7 +30,7 @@ class _SupplierManagerState extends State<SupplierManager> {
 
     Supplier newSupplier = Supplier(name: name, nif: nif, address: address);
     Supplier oldSupplier = repository.allSuppliers.elementAt(index);
-
+    repository.updateSupplierOnDb(oldSupplier, newSupplier);
     setState(() {
       repository.updateSupplier(oldSupplier, newSupplier);
     });
@@ -46,6 +44,7 @@ class _SupplierManagerState extends State<SupplierManager> {
     String address = newSupplierData['name'].toString();
 
     Supplier newSupplier = Supplier(name: name, nif: nif, address: address);
+    repository.addSupplierToDb(newSupplier);
     setState(() {
       repository.addSupplier(newSupplier);
     });
@@ -56,11 +55,12 @@ class _SupplierManagerState extends State<SupplierManager> {
     String id = newItemData['id'].toString();
     String name = newItemData['name'].toString();
     double price = double.parse(newItemData['price'].toString());
-    Item newItem = Item(productId: id, productName: name, unitPrice: price);
+    Supplier supplier = repository.allSuppliers.elementAt(index);
+    Item newItem = Item(productId: id, productName: name, unitPrice: price,supplierItem: supplier.name);
     setState(() {
-      repository.allSuppliers.elementAt(index).setNewItem(newItem);//repository.allSuppliers.elementAt(index).getItems();
+      itemRepo.setNewItem(supplier.getName,newItem);//repository.allSuppliers.elementAt(index).getItems();
     });
-    repository.allSuppliers.elementAt(index).printItems();
+    itemRepo.printAllItems();
     Navigator.of(context).pop();
   }
   void createNewItem(int index){
@@ -69,6 +69,7 @@ class _SupplierManagerState extends State<SupplierManager> {
       builder: (context) {
         return NewItemBox(
           onSave: (newItemData) => addItemToSupplier(index, newItemData),
+          supplier: index,
         );
       },
       );
@@ -97,6 +98,10 @@ class _SupplierManagerState extends State<SupplierManager> {
     setState(() {
       repository.allSuppliers.elementAt(index).setActive(false);
     });
+    Supplier oldS = repository.allSuppliers.elementAt(index);
+    Supplier newS = repository.allSuppliers.elementAt(index);
+    newS.setActive(false);
+    repository.updateSupplierOnDb(oldS, newS);
   }
   @override
   Widget build(BuildContext context) {

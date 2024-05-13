@@ -1,3 +1,4 @@
+import "package:app_stocatge/repositories/item_repository.dart";
 import "package:flutter/material.dart";
 
 class OrdersPage extends StatelessWidget {
@@ -63,5 +64,9 @@ class OrdersPage extends StatelessWidget {
     );
   }
   
-  createNewOrder() {}
+  createNewOrder() {
+    
+    ItemRepository itemRep = ItemRepository();
+    itemRep.printAllItems();
+  }
 }

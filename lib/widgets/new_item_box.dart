@@ -1,3 +1,4 @@
+import "package:app_stocatge/repositories/supplier_repository.dart";
 import "package:app_stocatge/widgets/form_tile.dart";
 import "package:app_stocatge/widgets/my_button.dart";
 import "package:flutter/material.dart";
@@ -5,19 +6,21 @@ import "package:flutter/material.dart";
 class NewItemBox extends StatelessWidget {
 
   final Function(Map<String, String>) onSave;
-
-  NewItemBox({super.key, required this.onSave});
+  final int supplier;
+  NewItemBox({super.key, required this.onSave, required this.supplier});
 
   final idController = TextEditingController();
   final nameController = TextEditingController();
   final priceController = TextEditingController();
+
+  final SupplierRepository  sR = SupplierRepository();
   
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       title: Text(
-        "New Item Data", 
+        "New Item for ${sR.getSupplier(supplier).name}" , 
         style: TextStyle(
           fontWeight: FontWeight.bold,
           color: Colors.brown[800],

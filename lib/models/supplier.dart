@@ -1,17 +1,29 @@
 
-import 'package:app_stocatge/models/item.dart';
+import 'package:hive/hive.dart';
+part 'supplier.g.dart';
 
-class Supplier {
+@HiveType(typeId: 1)
+class Supplier extends HiveObject{
+  @HiveField(0)
   String name;
+  @HiveField(1)
   String nif;
+  @HiveField(2)
   String address;
+  @HiveField(3)
   String ?municipation;
+  @HiveField(4)
   String ?province;
+  @HiveField(5)
   String ?zipCode;
+  @HiveField(6)
   String ?country;
+  @HiveField(7)
   String ?phoneNumber;
+  @HiveField(8)
   bool active;
-  List<Item> items = List.empty(growable: true);//List<Item>.filled(500, Null as Item ,growable: true);
+  @HiveField(9)
+  
 
   Supplier({
     required this.name,
@@ -58,14 +70,6 @@ class Supplier {
   String? get getCountry => country;
   String? get getPhone => phoneNumber;
   bool get isActive => active;
-  void printItems(){
-    print(items);
-  }
-  void setNewItem(Item newItem){
-    print("Adding new ittem");
-    items.add(newItem);
-    print("Item " + newItem.toString() + " added. ");
-  }
 
   Map<String, dynamic> toMap() {
     return {
