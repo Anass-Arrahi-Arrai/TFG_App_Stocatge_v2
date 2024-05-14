@@ -28,7 +28,7 @@ class _SupplierManagerState extends State<SupplierManager> {
     String nif = newSupplierData['nif'].toString();
     String address = newSupplierData['name'].toString();
 
-    Supplier newSupplier = Supplier(name: name, nif: nif, address: address);
+    Supplier newSupplier = Supplier(name: name, nif: nif, address: address, active: true);
     Supplier oldSupplier = repository.allSuppliers.elementAt(index);
     repository.updateSupplierOnDb(oldSupplier, newSupplier);
     setState(() {
@@ -43,7 +43,7 @@ class _SupplierManagerState extends State<SupplierManager> {
     String nif = newSupplierData['nif'].toString();
     String address = newSupplierData['name'].toString();
 
-    Supplier newSupplier = Supplier(name: name, nif: nif, address: address);
+    Supplier newSupplier = Supplier(name: name, nif: nif, address: address, active: true);
     repository.addSupplierToDb(newSupplier);
     setState(() {
       repository.addSupplier(newSupplier);
@@ -95,13 +95,12 @@ class _SupplierManagerState extends State<SupplierManager> {
       );
     }
   void setInactive(int index) {
+    Supplier oldSupplier = repository.allSuppliers.elementAt(index);
+    Supplier newSupplier = Supplier(name: oldSupplier.name, nif: oldSupplier.nif, address: oldSupplier.address, active: false);
+    repository.updateSupplierOnDb(oldSupplier, newSupplier);
     setState(() {
-      repository.allSuppliers.elementAt(index).setActive(false);
+      repository.updateSupplier(oldSupplier, newSupplier);
     });
-    Supplier oldS = repository.allSuppliers.elementAt(index);
-    Supplier newS = repository.allSuppliers.elementAt(index);
-    newS.setActive(false);
-    repository.updateSupplierOnDb(oldS, newS);
   }
   @override
   Widget build(BuildContext context) {

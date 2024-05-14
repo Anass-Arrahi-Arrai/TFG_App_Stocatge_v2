@@ -1,8 +1,29 @@
+// ignore_for_file: prefer_const_constructors
+
 import "package:app_stocatge/repositories/item_repository.dart";
+import "package:app_stocatge/widgets/form_tile.dart";
 import "package:flutter/material.dart";
 
-class OrdersPage extends StatelessWidget {
-  const OrdersPage({super.key});
+import "../widgets/Orders/pick_supplier_to_order_box.dart";
+
+class OrdersPage extends StatefulWidget {
+  OrdersPage({super.key});
+
+  @override
+  State<OrdersPage> createState() => _OrdersPageState();
+}
+
+class _OrdersPageState extends State<OrdersPage> {
+  final ItemRepository itemRep = ItemRepository();
+
+  createNewOrder() {
+    showDialog(
+      context: context, 
+      builder: (context) {
+        return PickSupplierToOrderBox();
+      },
+      );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +46,32 @@ class OrdersPage extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
+            flex: 0,
+            child: Padding(
+              padding: EdgeInsets.all(20),
+              child: Text(
+                "Current Orders",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+
+                ),
+              ),
+            ),
+          ),
+          Expanded(
             flex: 11,
             child: Padding(
-              padding: const EdgeInsets.all(25.0),
+              padding: const EdgeInsets.only(left: 25.0, bottom: 25.0, right: 25.0),
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
                   color: Colors.brown[300]
                 ),
-                child: ListView.builder(
-                  itemBuilder: (context, index) => null,
-                 
+                child: ListView(
+                  children:[
+                    FormTile(controller: TextEditingController(), dataName: "hello",),
+                  ]
                 )
               ),
             ),
@@ -62,11 +98,5 @@ class OrdersPage extends StatelessWidget {
         child: Icon(Icons.add),
       )
     );
-  }
-  
-  createNewOrder() {
-    
-    ItemRepository itemRep = ItemRepository();
-    itemRep.printAllItems();
   }
 }

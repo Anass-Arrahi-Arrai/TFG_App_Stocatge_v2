@@ -29,12 +29,13 @@ class Supplier extends HiveObject{
     required this.name,
     required this.nif,
     required this.address,
+    required this.active,
     this.municipation,
     this.province,
     this.zipCode,
     this.country,
     this.phoneNumber,
-    this.active = true,
+
   });
 
   void setName(String name){

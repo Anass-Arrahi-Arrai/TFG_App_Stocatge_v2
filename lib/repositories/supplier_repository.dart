@@ -50,17 +50,15 @@ class SupplierRepository {
     iRepository.items[supplier.getName] = List.empty(growable: true);
   }
 
-  // "Remove" supplier
-  void removeSupplier(Supplier supplier) {
-    _suppliers.remove(supplier);
-  }
-
   // Update Supplier
   void updateSupplier(Supplier oldSupplier, Supplier newSupplier) {
     final index = _suppliers.indexOf(oldSupplier);
+    print("old ${oldSupplier.name} is ${oldSupplier.isActive}");
+    print("new ${oldSupplier.name} is ${newSupplier.isActive}");
     if (index != -1) {
       _suppliers[index] = newSupplier;
     }
+    print("updated on list --> ${boxSuppliers.get(index)?.active}");
   }
 
   // Search supplier by name

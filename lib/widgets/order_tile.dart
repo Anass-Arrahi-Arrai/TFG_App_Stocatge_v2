@@ -2,11 +2,11 @@
 import 'package:flutter/material.dart';
 
 
-class FormTile extends StatelessWidget { 
+class OrderTile extends StatelessWidget { 
   final TextEditingController controller;
   final String dataName;
   
-  FormTile({
+  OrderTile({
     super.key, 
     required this.dataName,
     required this.controller,
@@ -30,6 +30,8 @@ class FormTile extends StatelessWidget {
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
                     color: Colors.brown[900],
+                    
+                    
                   ),
                 ),
                 SizedBox(
