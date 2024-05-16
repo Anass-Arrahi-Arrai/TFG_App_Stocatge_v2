@@ -1,5 +1,5 @@
 import "package:app_stocatge/repositories/supplier_repository.dart";
-import "package:app_stocatge/widgets/form_tile.dart";
+import "package:app_stocatge/widgets/Suppliers/form_tile.dart";
 import "package:app_stocatge/widgets/my_button.dart";
 import "package:flutter/material.dart";
 
@@ -12,6 +12,7 @@ class NewItemBox extends StatelessWidget {
   final idController = TextEditingController();
   final nameController = TextEditingController();
   final priceController = TextEditingController();
+  final formatController = TextEditingController();
 
   final SupplierRepository  sR = SupplierRepository();
   
@@ -49,6 +50,7 @@ class NewItemBox extends StatelessWidget {
                     FormTile(dataName: "Product ID",controller: idController,),
                     FormTile(dataName: "Product Name",controller: nameController),
                     FormTile(dataName: "Price",controller: priceController),
+                    FormTile(dataName: "Format (kg, bag, piece)",controller: formatController),
                     const SizedBox(height: 10)
                   ],
                 ),
@@ -84,7 +86,7 @@ class NewItemBox extends StatelessWidget {
       'name': nameController.text,
       'id': idController.text,
       'price': priceController.text,
-
+      'format': formatController.text,
     };
     onSave(newItemData);
   }

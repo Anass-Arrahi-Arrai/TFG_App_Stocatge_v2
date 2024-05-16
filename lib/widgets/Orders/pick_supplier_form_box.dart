@@ -1,19 +1,23 @@
 // ignore_for_file: sized_box_for_whitespace, prefer_const_constructors
 
 import 'package:app_stocatge/repositories/supplier_repository.dart';
+import 'package:app_stocatge/widgets/Orders/supplier_order_form.dart';
 import 'package:flutter/material.dart';
 
+import '../../models/supplier.dart';
+import 'supplier_button.dart';
 
 
-class PickSupplierToOrderBox  extends StatefulWidget {
+
+class PickSupplierFormBox  extends StatefulWidget {
   
-  PickSupplierToOrderBox({super.key});
+  PickSupplierFormBox({super.key});
 
   @override
-  State<PickSupplierToOrderBox> createState() => _PickSupplierToOrderBoxState();
+  State<PickSupplierFormBox> createState() => _PickSupplierToOrderBoxState();
 }
 
-class _PickSupplierToOrderBoxState extends State<PickSupplierToOrderBox> {
+class _PickSupplierToOrderBoxState extends State<PickSupplierFormBox> {
   SupplierRepository sRepo = SupplierRepository();
 
   @override
@@ -46,37 +50,51 @@ class _PickSupplierToOrderBoxState extends State<PickSupplierToOrderBox> {
                 color: Colors.brown,
                 borderRadius: BorderRadius.circular(10)
               ),
-                child: ListView.builder(
-                  itemCount: suppliers.length,  // Number of items in the list
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.brown[100],
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Center(
+                child: suppliers.isEmpty ?
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: Colors.brown,
+                      width: 3.0,
+                    ),
+                  ),
+                  child: Center(
                           child: Text(
-                            suppliers[index].name,  // Display the supplier name dynamically
+                            "NO SUPPLIERS YET",
                             style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.brown[800],
+                              fontSize: 16,
+                              color: Colors.white,
                             ),
                           ),
                         ),
-                      ),
-                    );
+                )
+              :
+                ListView.builder(
+                  itemCount: suppliers.length,  // Number of items in the list
+                  itemBuilder: (context, index) {
+                    return SupplierButton(text: suppliers[index].name, onPressed: () => openOrderForm(suppliers[index]));
                   },
                 ),
               ),
             ),
             
-          ]
+          ] 
           
         ),
       ),
     );
   }
+  
+  void openOrderForm(Supplier supplier) {
+    Navigator.of(context).pop();
+    showDialog(
+      context: context, 
+      builder: (context) {
+        //Navigator.of(context).pop();
+        return SupplierItemsForm(supplier: supplier);
+    },
+    );
+  }
 }
+

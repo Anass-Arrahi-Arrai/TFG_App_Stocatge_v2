@@ -55,8 +55,9 @@ class _SupplierManagerState extends State<SupplierManager> {
     String id = newItemData['id'].toString();
     String name = newItemData['name'].toString();
     double price = double.parse(newItemData['price'].toString());
+    String format = newItemData['format'].toString();
     Supplier supplier = repository.allSuppliers.elementAt(index);
-    Item newItem = Item(productId: id, productName: name, unitPrice: price,supplierItem: supplier.name);
+    Item newItem = Item(productId: id, productName: name, unitPrice: price, supplierItem: supplier.name, itemFormat: format);
     setState(() {
       itemRepo.setNewItem(supplier.getName,newItem);//repository.allSuppliers.elementAt(index).getItems();
     });

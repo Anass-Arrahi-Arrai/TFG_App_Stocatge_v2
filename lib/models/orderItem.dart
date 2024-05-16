@@ -17,4 +17,7 @@ class OrderItem {
     quantity = newQuantity;
   }
   
+  void printOrderItem(){
+    print("Item: ${item.productName}, quantity: $quantity, total price: $totalPrice");
+  }
 }

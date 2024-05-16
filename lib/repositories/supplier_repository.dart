@@ -7,7 +7,7 @@ import '../models/supplier.dart';
 
 class SupplierRepository {
 
-  List<Supplier> _suppliers = [];
+  List<Supplier> suppliers = [];
   late Box<Supplier> boxSuppliers;
   late ItemRepository iRepository;
 
@@ -21,7 +21,7 @@ class SupplierRepository {
     loadData(); 
   }
   void loadData() {
-    _suppliers = allSuppliersFromDb; // Carga los suppliers desde Hive
+    suppliers = allSuppliersFromDb; // Carga los suppliers desde Hive
   }
   // Get all suppliers from db
   List<Supplier> get allSuppliersFromDb => boxSuppliers.values.toList();
@@ -37,33 +37,33 @@ class SupplierRepository {
     }
   }
 
-  int get getLength => _suppliers.length;
+  int get getLength => suppliers.length;
   // Get all suppliers
-  List<Supplier> get allSuppliers => _suppliers;
+  List<Supplier> get allSuppliers => suppliers;
   Supplier getSupplier(int idx){
-    return _suppliers.elementAt(idx);
+    return suppliers.elementAt(idx);
   }
  
   // Add new Supplier
   void addSupplier(Supplier supplier) {
-    _suppliers.add(supplier);
+    suppliers.add(supplier);
     iRepository.items[supplier.getName] = List.empty(growable: true);
   }
 
   // Update Supplier
   void updateSupplier(Supplier oldSupplier, Supplier newSupplier) {
-    final index = _suppliers.indexOf(oldSupplier);
+    final index = suppliers.indexOf(oldSupplier);
     print("old ${oldSupplier.name} is ${oldSupplier.isActive}");
     print("new ${oldSupplier.name} is ${newSupplier.isActive}");
     if (index != -1) {
-      _suppliers[index] = newSupplier;
+      suppliers[index] = newSupplier;
     }
     print("updated on list --> ${boxSuppliers.get(index)?.active}");
   }
 
   // Search supplier by name
   List<Supplier> searchSuppliers(String name) {
-    return _suppliers.where((supplier) => supplier.name.contains(name)).toList();
+    return suppliers.where((supplier) => supplier.name.contains(name)).toList();
   }
  
 }

@@ -16,7 +16,12 @@ class ItemRepository {
     boxItems = Hive.box<Item>('itemsBox');
     loadItems();
   }
-  
+  List<Item>? getItems(String supplier){
+    if(items[supplier]==Null){
+      return [];
+    }
+    return items[supplier];
+  }
   // Load All supplier items from db
   void loadItems() {
     items.clear();  // Limpiar el mapa existente para rellenar con nuevos datos.
@@ -62,7 +67,8 @@ class ItemRepository {
     items.forEach((supName, items) {
         print("Items for $supName:");
         for (var item in items) {
-            print("   ${item.productId}: ${item.productName},${item.unitPrice}"); // Print each item's product name
+            
+            print("   ${item.productId}: ${item.productName},${item.unitPrice},${item.itemFormat} "); // Print each item's product name
         }
         print("");  // Add a blank line for better readability between suppliers
     });

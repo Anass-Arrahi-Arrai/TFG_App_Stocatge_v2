@@ -20,12 +20,12 @@ class SupplierAdapter extends TypeAdapter<Supplier> {
       name: fields[0] as String,
       nif: fields[1] as String,
       address: fields[2] as String,
+      active: fields[8] as bool,
       municipation: fields[3] as String?,
       province: fields[4] as String?,
       zipCode: fields[5] as String?,
       country: fields[6] as String?,
       phoneNumber: fields[7] as String?,
-      active: fields[8] as bool,
     );
   }
 

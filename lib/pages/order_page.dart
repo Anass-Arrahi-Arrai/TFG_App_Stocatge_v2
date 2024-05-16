@@ -1,10 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
 import "package:app_stocatge/repositories/item_repository.dart";
-import "package:app_stocatge/widgets/form_tile.dart";
+import "package:app_stocatge/widgets/Suppliers/form_tile.dart";
 import "package:flutter/material.dart";
 
-import "../widgets/Orders/pick_supplier_to_order_box.dart";
+import "../widgets/Orders/pick_supplier_form_box.dart";
 
 class OrdersPage extends StatefulWidget {
   OrdersPage({super.key});
@@ -20,7 +20,7 @@ class _OrdersPageState extends State<OrdersPage> {
     showDialog(
       context: context, 
       builder: (context) {
-        return PickSupplierToOrderBox();
+        return PickSupplierFormBox();
       },
       );
   }

@@ -47,7 +47,7 @@ class SupplierTile extends StatelessWidget {
                 SlidableAction(
                 padding: EdgeInsets.zero,
                 onPressed: addItem,
-                icon: Icons.post_add_rounded,
+                icon: Icons.add_shopping_cart_rounded,
                 backgroundColor: Colors.yellow,
                 borderRadius: BorderRadius.circular(20),
                 )

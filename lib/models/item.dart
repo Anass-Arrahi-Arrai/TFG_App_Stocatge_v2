@@ -12,6 +12,8 @@ class Item extends HiveObject {
   String productName;
   @HiveField(3)
   double unitPrice;
+  @HiveField(4)
+  String ?itemFormat;
 
 
   Item({
@@ -19,6 +21,7 @@ class Item extends HiveObject {
     required this.productId,
     required this.productName,
     required this.unitPrice,
+    this.itemFormat,
   });
 
   @override

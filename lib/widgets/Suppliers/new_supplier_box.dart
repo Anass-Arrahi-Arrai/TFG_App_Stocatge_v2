@@ -1,6 +1,6 @@
 // ignore_for_file: sized_box_for_whitespace
 
-import 'package:app_stocatge/widgets/form_tile.dart';
+import 'package:app_stocatge/widgets/Suppliers/form_tile.dart';
 import 'package:app_stocatge/widgets/my_button.dart';
 import 'package:flutter/material.dart';
 

@@ -1,6 +1,11 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import "package:app_stocatge/models/item.dart";
+import "package:app_stocatge/models/supplier.dart";
+import "package:app_stocatge/repositories/item_repository.dart";
+import "package:app_stocatge/repositories/supplier_repository.dart";
 import "package:flutter/material.dart";
+import "package:hive/hive.dart";
 
 //Stateles widgets mai canvien les coses en pantalla, els statefull sí canvien depenent del estat!!
 class CheckStockPage extends StatefulWidget {
@@ -14,8 +19,21 @@ class _CheckStockPageState extends State<CheckStockPage> {
   // variable
   int _counter = 0;
   // method
-
+  
+  Box<Item> boxItems = Hive.box<Item>('itemsBox');
+  Box<Supplier> supplierItems = Hive.box<Supplier>('supplierBox');
+  ItemRepository iR = ItemRepository();
+  SupplierRepository iS = SupplierRepository();
   void _incrementCounter() {
+    setState(() {
+      iR.items.clear();
+      iS.suppliers.clear();
+      boxItems.clear();
+      supplierItems.clear();
+    });
+    
+    
+    print("boxes cleared");
     //Rebuilds the widget, vamos, que lo actualiza en pantalla.
     setState(() {
       _counter++;

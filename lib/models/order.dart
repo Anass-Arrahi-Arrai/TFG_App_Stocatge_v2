@@ -5,14 +5,14 @@ class Order {
   int supplierId;
   DateTime date;
   List<OrderItem> items;
-  String status;
+  bool received;
 
   Order({
     required this.id,
     required this.supplierId,
     required this.date,
     required this.items,
-    required this.status,
+    this.received = false,
   });
 
   void addItem(OrderItem newItem) {
@@ -27,13 +27,13 @@ class Order {
     return items.fold(0, (total, current) => total + current.totalPrice);
   }
 
-  void updateStatus(String newStatus) {
-    status = newStatus;
+  void updateStatus(bool newStatus) {
+    received = newStatus;
   }
 
   @override
   String toString() {
-    return 'Order{id: $id, supplierId: $supplierId, date: $date, items: $items, status: $status}';
+    return 'Order{id: $id, supplierId: $supplierId, date: $date, items: $items, status: $received}';
   }
 }
 
