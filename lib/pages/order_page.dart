@@ -1,13 +1,19 @@
 // ignore_for_file: prefer_const_constructors
 
 import "package:app_stocatge/repositories/item_repository.dart";
-import "package:app_stocatge/widgets/Suppliers/form_tile.dart";
+import "package:app_stocatge/repositories/order_repository.dart";
+import "package:app_stocatge/widgets/Orders/order_tile.dart";
+import "package:app_stocatge/widgets/share_order_box.dart";
 import "package:flutter/material.dart";
 
+import "../models/order.dart";
+import "../models/supplier.dart";
+import "../widgets/Orders/check_order_box.dart";
 import "../widgets/Orders/pick_supplier_form_box.dart";
+import "../widgets/Orders/supplier_order_form.dart";
 
 class OrdersPage extends StatefulWidget {
-  OrdersPage({super.key});
+  const OrdersPage({super.key});
 
   @override
   State<OrdersPage> createState() => _OrdersPageState();
@@ -15,15 +21,54 @@ class OrdersPage extends StatefulWidget {
 
 class _OrdersPageState extends State<OrdersPage> {
   final ItemRepository itemRep = ItemRepository();
-
-  createNewOrder() {
+  final OrderRepository orderRep = OrderRepository();
+  
+  void saveOrder(Order order){
+    Navigator.of(context).pop();
     showDialog(
       context: context, 
       builder: (context) {
-        return PickSupplierFormBox();
+        //Navigator.of(context).pop();
+        return ShareOrderBox(order: order);
       },
-      );
+    );
+    setState(() {
+      orderRep.add(order);
+    });
+    
   }
+
+  void openOrderForm(Supplier supplier) {
+    Navigator.of(context).pop();
+    showDialog(
+      context: context, 
+      builder: (context) {
+        return SupplierItemsForm(
+          supplier: supplier,
+          onSave: (Order)=>saveOrder(Order),
+        );
+      },
+    );
+  }
+  void createNewOrder() {
+    showDialog(
+      context: context, 
+      builder: (context) {
+        return PickSupplierFormBox(
+          onPicked: (Supplier) => openOrderForm(Supplier),
+        );
+      },
+    );
+  }
+  checkOrder(Order order) {
+    showDialog(
+      context: context, 
+      builder: (context) {
+        return checkOrderBox(order: order);
+      },
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -68,10 +113,14 @@ class _OrdersPageState extends State<OrdersPage> {
                   borderRadius: BorderRadius.circular(10.0),
                   color: Colors.brown[300]
                 ),
-                child: ListView(
-                  children:[
-                    FormTile(controller: TextEditingController(), dataName: "hello",),
-                  ]
+                child: ListView.builder(
+                  itemCount: orderRep.getOrders().length,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () => checkOrder(orderRep.getOrders()[index]),
+                      child: OrderTile(order: orderRep.getOrders()[index]));
+                  },
+                  
                 )
               ),
             ),
@@ -99,4 +148,6 @@ class _OrdersPageState extends State<OrdersPage> {
       )
     );
   }
+  
+  
 }

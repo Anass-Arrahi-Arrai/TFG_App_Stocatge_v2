@@ -1,17 +1,22 @@
 import "package:app_stocatge/models/order.dart";
 import "package:app_stocatge/models/orderItem.dart";
 import "package:app_stocatge/repositories/item_repository.dart";
+import "package:app_stocatge/repositories/order_repository.dart";
 import "package:app_stocatge/widgets/Orders/item_order_tile.dart";
 import "package:app_stocatge/widgets/my_button.dart";
+import "package:app_stocatge/widgets/share_order_box.dart";
 import "package:flutter/material.dart";
 
 import "../../models/item.dart";
 import "../../models/supplier.dart";
+import "check_order_box.dart";
 
 class SupplierItemsForm extends StatefulWidget {
-  final Supplier supplier;
 
-  SupplierItemsForm({super.key, required this.supplier});
+  final Supplier supplier;
+  final Function(Order order) onSave;
+
+  SupplierItemsForm({super.key, required this.supplier, required this.onSave});
 
   @override
   State<SupplierItemsForm> createState() => _SupplierItemsFormState();
@@ -21,12 +26,10 @@ class _SupplierItemsFormState extends State<SupplierItemsForm> {
   
   final ItemRepository iRepo = ItemRepository();
   final List<TextEditingController> _controllers = [];
-  
+  final OrderRepository oRepo = OrderRepository();
   
   @override
   void initState() {
-    
-    // TODO: implement initState
     super.initState();
     List<Item>? items = iRepo.items[widget.supplier.name];
     if (items != null) {
@@ -34,9 +37,9 @@ class _SupplierItemsFormState extends State<SupplierItemsForm> {
         _controllers.add(TextEditingController());
       }
     }
-    
-  
   }
+
+
   @override
   Widget build(BuildContext context) {
     
@@ -129,7 +132,7 @@ class _SupplierItemsFormState extends State<SupplierItemsForm> {
   }
 
   void handleSave() {
-    //Crear tots els itemOrders
+    //Create All item orders and put it in a list
     List<OrderItem> orderItems = [];
     List<Item>? items = iRepo.items[widget.supplier.name];
     if(items!=null){
@@ -139,11 +142,9 @@ class _SupplierItemsFormState extends State<SupplierItemsForm> {
       }
     }
     orderItems.forEach((element) {element.printOrderItem();});
-    //Crear Order
+    //Create Order
+    Order order = Order(supplierName: widget.supplier.getName, items: orderItems);
     
-    //Transform order to text, and send it via, mail, whatsapp, etc. 
-
-    //Close Order box
-    Navigator.of(context).pop();
+    widget.onSave(order);
   }
 }

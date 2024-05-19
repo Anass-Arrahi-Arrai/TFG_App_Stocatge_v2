@@ -1,11 +1,16 @@
 import 'package:app_stocatge/models/item.dart';
+import 'package:hive/hive.dart';
+part 'orderItem.g.dart';
 
-class OrderItem {
-
+@HiveType(typeId: 3)
+class OrderItem extends HiveObject{
+  @HiveField(0)
   Item item;
+  @HiveField(1)
   int quantity;
-
+  @HiveField(2)
   double get totalPrice => item.unitPrice * quantity;
+  
 
   OrderItem({
     required this.item,
@@ -18,6 +23,6 @@ class OrderItem {
   }
   
   void printOrderItem(){
-    print("Item: ${item.productName}, quantity: $quantity, total price: $totalPrice");
+    print("Id: ${item.productId}, ${item.productName}, quantity: $quantity, total price: $totalPrice");
   }
 }

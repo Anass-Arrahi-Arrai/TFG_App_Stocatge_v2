@@ -47,7 +47,6 @@ class NewItemBox extends StatelessWidget {
               ),
                 child: ListView(
                   children: [
-                    FormTile(dataName: "Product ID",controller: idController,),
                     FormTile(dataName: "Product Name",controller: nameController),
                     FormTile(dataName: "Price",controller: priceController),
                     FormTile(dataName: "Format (kg, bag, piece)",controller: formatController),
@@ -84,7 +83,7 @@ class NewItemBox extends StatelessWidget {
   void handleSave() {
     Map<String, String> newItemData = {
       'name': nameController.text,
-      'id': idController.text,
+      
       'price': priceController.text,
       'format': formatController.text,
     };

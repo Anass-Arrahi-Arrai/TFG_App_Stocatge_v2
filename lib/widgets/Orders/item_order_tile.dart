@@ -2,8 +2,10 @@
 
 import 'package:app_stocatge/models/item.dart';
 import 'package:app_stocatge/widgets/circle_button.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 
 // ignore: must_be_immutable
 class ItemOrderTile extends StatefulWidget {
@@ -37,27 +39,30 @@ class _ItemOrderTileState extends State<ItemOrderTile> {
           ),
             child: Row(
               children: [
-                Text(
-                  widget.item.productName,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.brown[900],
+                Expanded(
+                  child: Center(
+                    child: Text(
+                      widget.item.productName,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.brown[900],
+                      ),
+                    ),
                   ),
                 ),
-                SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  "(${widget.item.itemFormat!})",
-                  style: TextStyle(
-                    fontSize: 11,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.brown[900],
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "(${widget.item.itemFormat!})",
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.brown[900],
+                      ),
+                    ),
                   ),
-                ),
-                SizedBox(
-                  width: 10,
                 ),
                 Expanded(
                   child: TextField(
@@ -68,7 +73,7 @@ class _ItemOrderTileState extends State<ItemOrderTile> {
                       fontSize:10,
                     ),
                     decoration: InputDecoration(
-                      hintText: 'Enter ${widget.item.productName} quantity',
+                      hintText: 'Enter quantity',
                       hintStyle: TextStyle(
                         fontSize: 10,
                         fontWeight: FontWeight.w400,

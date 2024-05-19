@@ -10,8 +10,8 @@ import 'supplier_button.dart';
 
 
 class PickSupplierFormBox  extends StatefulWidget {
-  
-  PickSupplierFormBox({super.key});
+  final Function(Supplier) onPicked;
+  const PickSupplierFormBox({super.key, required this.onPicked});
 
   @override
   State<PickSupplierFormBox> createState() => _PickSupplierToOrderBoxState();
@@ -69,11 +69,11 @@ class _PickSupplierToOrderBoxState extends State<PickSupplierFormBox> {
                           ),
                         ),
                 )
-              :
+                :
                 ListView.builder(
                   itemCount: suppliers.length,  // Number of items in the list
                   itemBuilder: (context, index) {
-                    return SupplierButton(text: suppliers[index].name, onPressed: () => openOrderForm(suppliers[index]));
+                    return SupplierButton(text: suppliers[index].name, onPressed: () => widget.onPicked(suppliers[index]));
                   },
                 ),
               ),
@@ -86,15 +86,6 @@ class _PickSupplierToOrderBoxState extends State<PickSupplierFormBox> {
     );
   }
   
-  void openOrderForm(Supplier supplier) {
-    Navigator.of(context).pop();
-    showDialog(
-      context: context, 
-      builder: (context) {
-        //Navigator.of(context).pop();
-        return SupplierItemsForm(supplier: supplier);
-    },
-    );
-  }
+  
 }
 

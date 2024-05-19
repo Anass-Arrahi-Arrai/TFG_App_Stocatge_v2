@@ -17,7 +17,10 @@ class MyButton extends StatelessWidget {
         onPressed: isEnabled ? onPressed : null,
         textColor: Colors.white,
         color:Colors.brown,
-        child: Text(text),
+        child: Text(
+          text,
+          textAlign: TextAlign.center,
+          ),
         disabledColor: Colors.grey[800],
       ),
     );

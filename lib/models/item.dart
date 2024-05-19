@@ -1,13 +1,15 @@
 import 'package:hive/hive.dart';
+import 'package:uuid/uuid.dart';
 
 part 'item.g.dart';
 
 @HiveType(typeId: 2)
 class Item extends HiveObject {
+  
   @HiveField(0)
   String supplierItem;
   @HiveField(1)
-  String productId;
+  var productId = const Uuid().v1();
   @HiveField(2)
   String productName;
   @HiveField(3)
@@ -18,7 +20,6 @@ class Item extends HiveObject {
 
   Item({
     required this.supplierItem,
-    required this.productId,
     required this.productName,
     required this.unitPrice,
     this.itemFormat,

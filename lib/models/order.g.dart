@@ -1,43 +1,44 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'item.dart';
+part of 'order.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class ItemAdapter extends TypeAdapter<Item> {
+class OrderAdapter extends TypeAdapter<Order> {
   @override
-  final int typeId = 2;
+  final int typeId = 4;
 
   @override
-  Item read(BinaryReader reader) {
+  Order read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Item(
-      supplierItem: fields[0] as String,
-      productName: fields[2] as String,
-      unitPrice: fields[3] as double,
-      itemFormat: fields[4] as String?,
-    )..productId = fields[1] as String;
+    return Order(
+      supplierName: fields[1] as String,
+      items: (fields[3] as List).cast<OrderItem>(),
+      received: fields[4] as bool,
+    )
+      ..id = fields[0] as String
+      ..date = fields[2] as DateTime;
   }
 
   @override
-  void write(BinaryWriter writer, Item obj) {
+  void write(BinaryWriter writer, Order obj) {
     writer
       ..writeByte(5)
       ..writeByte(0)
-      ..write(obj.supplierItem)
+      ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.productId)
+      ..write(obj.supplierName)
       ..writeByte(2)
-      ..write(obj.productName)
+      ..write(obj.date)
       ..writeByte(3)
-      ..write(obj.unitPrice)
+      ..write(obj.items)
       ..writeByte(4)
-      ..write(obj.itemFormat);
+      ..write(obj.received);
   }
 
   @override
@@ -46,7 +47,7 @@ class ItemAdapter extends TypeAdapter<Item> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ItemAdapter &&
+      other is OrderAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

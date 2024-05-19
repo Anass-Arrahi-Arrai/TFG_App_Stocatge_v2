@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_const_constructors_in_immutables
 //import 'package:app_stocatge/models/item.dart';
+import 'package:app_stocatge/models/order.dart';
+import 'package:app_stocatge/models/orderItem.dart';
 import 'package:app_stocatge/models/supplier.dart';
 import 'package:app_stocatge/pages/home_page.dart';
 import 'package:app_stocatge/pages/supplier_manager_page.dart';
@@ -18,9 +20,12 @@ void main() async{
   
   Hive.registerAdapter(SupplierAdapter());
   Hive.registerAdapter(ItemAdapter());
+  Hive.registerAdapter(OrderAdapter());
+  Hive.registerAdapter(OrderItemAdapter());
 
   boxItems = await Hive.openBox<Item>('itemsBox');
   boxSuppliers = await Hive.openBox<Supplier>('supplierBox');
+  boxOrders = await Hive.openBox<Order>('orderBox');
   
   runApp(MyApp());
 }
@@ -34,7 +39,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomePage(),
-      theme: ThemeData(primarySwatch: Colors.brown),
+      theme: ThemeData(
+        primarySwatch: Colors.brown,
+        dialogBackgroundColor: Colors.brown[200],
+        ),
       routes: {
         '/checkStock' :(context) => CheckStockPage(),
         '/orders' : (context) => OrdersPage(),

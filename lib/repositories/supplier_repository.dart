@@ -40,6 +40,9 @@ class SupplierRepository {
   int get getLength => suppliers.length;
   // Get all suppliers
   List<Supplier> get allSuppliers => suppliers;
+  Supplier getSupplierByName(String name){
+    return suppliers.firstWhere((element) => element.name == name);
+  }
   Supplier getSupplier(int idx){
     return suppliers.elementAt(idx);
   }

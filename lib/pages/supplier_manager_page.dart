@@ -5,7 +5,7 @@ import "package:app_stocatge/models/item.dart";
 import "package:app_stocatge/repositories/item_repository.dart";
 import "package:app_stocatge/widgets/Suppliers/new_supplier_box.dart";
 import "package:app_stocatge/widgets/Suppliers/supplier_tile.dart";
-import "package:app_stocatge/widgets/new_item_box.dart";
+import "package:app_stocatge/widgets/Suppliers/new_item_box.dart";
 import "package:flutter/material.dart";
 import '../models/supplier.dart';
 import '../repositories/supplier_repository.dart';
@@ -52,12 +52,11 @@ class _SupplierManagerState extends State<SupplierManager> {
   }
 
   void addItemToSupplier(int index, Map<String, String> newItemData) {
-    String id = newItemData['id'].toString();
     String name = newItemData['name'].toString();
     double price = double.parse(newItemData['price'].toString());
     String format = newItemData['format'].toString();
     Supplier supplier = repository.allSuppliers.elementAt(index);
-    Item newItem = Item(productId: id, productName: name, unitPrice: price, supplierItem: supplier.name, itemFormat: format);
+    Item newItem = Item(productName: name, unitPrice: price, supplierItem: supplier.name, itemFormat: format);
     setState(() {
       itemRepo.setNewItem(supplier.getName,newItem);//repository.allSuppliers.elementAt(index).getItems();
     });
@@ -136,7 +135,7 @@ class _SupplierManagerState extends State<SupplierManager> {
                   itemCount: repository.getLength,
                   itemBuilder: (context, index) {
                     return SupplierTile(
-                      supplierName: repository.allSuppliers[index].getName, 
+                      supplierName: repository.allSuppliers[index].getName,
                       active: repository.allSuppliers[index].isActive,
                       setInactive: (context) => setInactive(index),
                       modifySupplier: (context) => modifySup(index),
