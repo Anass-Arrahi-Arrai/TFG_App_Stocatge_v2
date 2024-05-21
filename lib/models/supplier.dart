@@ -23,6 +23,7 @@ class Supplier extends HiveObject{
   @HiveField(8)
   bool active;
   @HiveField(9)
+  String ?email;
   
 
   Supplier({
@@ -30,11 +31,8 @@ class Supplier extends HiveObject{
     required this.nif,
     required this.address,
     required this.active,
-    this.municipation,
-    this.province,
-    this.zipCode,
-    this.country,
     this.phoneNumber,
+    this.email,
 
   });
 
@@ -77,11 +75,9 @@ class Supplier extends HiveObject{
       'name': name,
       'nif': nif,
       'address': address,
-      'municipation': municipation ,
-      'province': province,
-      'zip': zipCode,
-      'country': country,
       'num': phoneNumber,
+      'email': email,
+      
     };
   }
 }

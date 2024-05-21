@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 class FormTile extends StatelessWidget { 
   final TextEditingController controller;
   final String dataName;
+  final String? Function(String?)? validator;
   
   FormTile({
     super.key, 
     required this.dataName,
     required this.controller,
+    this.validator,
   });
 
   @override
@@ -36,7 +38,8 @@ class FormTile extends StatelessWidget {
                   width: 10,
                 ),
                 Expanded(
-                  child: TextField(
+                  child: TextFormField(
+                    validator: validator,
                     controller: controller,
                     textAlign: TextAlign.left,
                     textAlignVertical: TextAlignVertical.center,

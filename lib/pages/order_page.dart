@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, unused_element, sort_child_properties_last
 
 import "package:app_stocatge/repositories/item_repository.dart";
 import "package:app_stocatge/repositories/order_repository.dart";
@@ -68,6 +68,45 @@ class _OrdersPageState extends State<OrdersPage> {
       },
     );
   }
+  void deleteOrder(Order order) async{
+    bool confirm = await _showConfirmationDialog(context);
+    if(confirm){
+      setState(() {
+        orderRep.removeOrder(order.id);
+      });
+    }
+  }
+
+  Future<bool> _showConfirmationDialog(BuildContext context) async {
+  return await showDialog<bool>(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text(
+          'Confirm Deletion',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.red[700],
+          ),
+          ),
+        content: Text('Are you sure you want to delete this order? This action is irreversible and cannot be undone.'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: Text('Delete'),
+            style: TextButton.styleFrom(
+              foregroundColor: Colors.red,
+            ),
+          ),
+        ],
+      );
+    },
+  ) ?? false; // Return false if the dialog is dismissed by tapping outside
+}
 
 
   @override
@@ -113,12 +152,29 @@ class _OrdersPageState extends State<OrdersPage> {
                   borderRadius: BorderRadius.circular(10.0),
                   color: Colors.brown[300]
                 ),
-                child: ListView.builder(
+                child: orderRep.getOrders().isEmpty ? 
+                Container(
+                  width: 500,
+                  child: Center(
+                    child: Text(
+                      "No orders Yet",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white
+                      ),
+                      )
+                    )
+                  )
+                :
+                ListView.builder(
                   itemCount: orderRep.getOrders().length,
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () => checkOrder(orderRep.getOrders()[index]),
-                      child: OrderTile(order: orderRep.getOrders()[index]));
+                      child: OrderTile(
+                        order: orderRep.getOrders()[index], 
+                        onDelete: (context) => deleteOrder(orderRep.getOrders()[index]),
+                        ));
                   },
                   
                 )

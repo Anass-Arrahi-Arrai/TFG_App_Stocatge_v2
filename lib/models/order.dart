@@ -49,9 +49,17 @@ class Order extends HiveObject{
     received = newStatus;
   }
 
+  String itemsToString(){
+    String items = "NAME  -   QUANTITY \n -------------------------------\n";
+    for (var element in this.items) {
+      items += "${element.item.productName}      -      ${element.quantity} \n";
+    }
+    return items;
+  }
+
   @override
   String toString() {
-    return 'Order{id: $id, supplierId: $id, date: $date, items: $items, status: $received}';
+    return 'Order to $supplierName - ${getDate()} \n\n ${itemsToString()}';
   }
 }
 

@@ -58,6 +58,14 @@ class SupplierTile extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.brown[200],
               borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: const Offset(0, 3),
+                ),
+              ],
             ),
             child: Center(
               child: Text(

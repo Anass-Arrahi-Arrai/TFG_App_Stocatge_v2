@@ -3,6 +3,7 @@
 
 import "package:app_stocatge/models/item.dart";
 import "package:app_stocatge/repositories/item_repository.dart";
+import "package:app_stocatge/widgets/Suppliers/modify_supplier_box.dart";
 import "package:app_stocatge/widgets/Suppliers/new_supplier_box.dart";
 import "package:app_stocatge/widgets/Suppliers/supplier_tile.dart";
 import "package:app_stocatge/widgets/Suppliers/new_item_box.dart";
@@ -24,11 +25,14 @@ class _SupplierManagerState extends State<SupplierManager> {
   final ItemRepository itemRepo = ItemRepository();
 
   void getNewSuplierToReplace(Map<String, String> newSupplierData, int index){
+
     String name = newSupplierData['name'].toString();
     String nif = newSupplierData['nif'].toString();
-    String address = newSupplierData['name'].toString();
+    String address = newSupplierData['address'].toString();
+    String email = newSupplierData['email'].toString();
+    String number = newSupplierData['num'].toString();
 
-    Supplier newSupplier = Supplier(name: name, nif: nif, address: address, active: true);
+    Supplier newSupplier = Supplier(name: name, nif: nif, address: address, email: email, phoneNumber: number, active: true);
     Supplier oldSupplier = repository.allSuppliers.elementAt(index);
     repository.updateSupplierOnDb(oldSupplier, newSupplier);
     setState(() {
@@ -41,9 +45,11 @@ class _SupplierManagerState extends State<SupplierManager> {
 
     String name = newSupplierData['name'].toString();
     String nif = newSupplierData['nif'].toString();
-    String address = newSupplierData['name'].toString();
+    String address = newSupplierData['adress'].toString();
+    String email = newSupplierData['email'].toString();
+    String number = newSupplierData['num'].toString();
 
-    Supplier newSupplier = Supplier(name: name, nif: nif, address: address, active: true);
+    Supplier newSupplier = Supplier(name: name, nif: nif, address: address, email: email, phoneNumber: number, active: true);
     repository.addSupplierToDb(newSupplier);
     setState(() {
       repository.addSupplier(newSupplier);
@@ -78,7 +84,8 @@ class _SupplierManagerState extends State<SupplierManager> {
     showDialog(
       context: context, 
       builder: (context) {
-        return NewSupplierBox(
+        return ModifySupBox(
+          supplier: repository.allSuppliers.elementAt(index),
           onSave: (newSupplierData) => getNewSuplierToReplace(newSupplierData, index),
         );
       },
@@ -94,14 +101,51 @@ class _SupplierManagerState extends State<SupplierManager> {
       },
       );
     }
-  void setInactive(int index) {
-    Supplier oldSupplier = repository.allSuppliers.elementAt(index);
-    Supplier newSupplier = Supplier(name: oldSupplier.name, nif: oldSupplier.nif, address: oldSupplier.address, active: false);
-    repository.updateSupplierOnDb(oldSupplier, newSupplier);
-    setState(() {
-      repository.updateSupplier(oldSupplier, newSupplier);
-    });
+  Future<bool> showConfirmationDialog(BuildContext context) async {
+    return await showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            'Confirm Deletion',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.red[700],
+            ),
+            ),
+          content: Text('Are you sure you want to delete this Supplier? This action is irreversible and cannot be undone.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: Text('Delete'),
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.red,
+                ),
+              ),
+            ],
+          );
+        },
+      ) ?? false; // Return false if the dialog is dismissed by tapping outside
   }
+  void setInactive(int index) async{
+    bool confirm = await showConfirmationDialog(context);
+    if(confirm){
+      Supplier oldSupplier = repository.allSuppliers.elementAt(index);
+      Supplier newSupplier = Supplier(name: oldSupplier.name, nif: oldSupplier.nif, address: oldSupplier.address, active: false);
+      repository.updateSupplierOnDb(oldSupplier, newSupplier);
+      
+      setState(() {
+        repository.updateSupplier(oldSupplier, newSupplier);
+      });
+    }
+  }
+  
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

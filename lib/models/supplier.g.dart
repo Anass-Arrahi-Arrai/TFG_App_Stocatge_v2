@@ -21,18 +21,19 @@ class SupplierAdapter extends TypeAdapter<Supplier> {
       nif: fields[1] as String,
       address: fields[2] as String,
       active: fields[8] as bool,
-      municipation: fields[3] as String?,
-      province: fields[4] as String?,
-      zipCode: fields[5] as String?,
-      country: fields[6] as String?,
       phoneNumber: fields[7] as String?,
-    );
+      email: fields[9] as String?,
+    )
+      ..municipation = fields[3] as String?
+      ..province = fields[4] as String?
+      ..zipCode = fields[5] as String?
+      ..country = fields[6] as String?;
   }
 
   @override
   void write(BinaryWriter writer, Supplier obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -50,7 +51,9 @@ class SupplierAdapter extends TypeAdapter<Supplier> {
       ..writeByte(7)
       ..write(obj.phoneNumber)
       ..writeByte(8)
-      ..write(obj.active);
+      ..write(obj.active)
+      ..writeByte(9)
+      ..write(obj.email);
   }
 
   @override

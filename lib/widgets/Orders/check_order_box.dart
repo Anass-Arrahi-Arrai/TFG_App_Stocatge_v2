@@ -153,33 +153,35 @@ class checkOrderBox extends StatelessWidget {
                             child: ListView.builder(
                               itemCount: supData.length,
                               itemBuilder: (context, index) {
-                                return Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Expanded(
-                                      child: Text(
-                                        "${toSentenceCase(supData.keys.toList()[index])}:",
-                                        textAlign: TextAlign.end,
-                                        style: TextStyle(
-                                            color: Colors.brown[800],
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 12
+                                return Padding(
+                                  padding: const EdgeInsets.only(left: 10, right: 10),
+                                  child: Row( 
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          "${toSentenceCase(supData.keys.toList()[index])}:",
+                                          textAlign: TextAlign.end,
+                                          style: TextStyle(
+                                              color: Colors.brown[800],
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 12
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    SizedBox(width: 10,),
-                                    Expanded(
-                                      child: Text(
-                                        supData.values.toList()[index] ?? "?",
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                            color: Colors.brown[800],
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 10
+                                      SizedBox(width: 10,),
+                                      Expanded(
+                                        child: Text(
+                                          supData.values.toList()[index] ?? "?",
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                              color: Colors.brown[800],
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 10
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 );
                               },
                             ),

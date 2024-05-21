@@ -18,6 +18,19 @@ class OrderRepository {
   List<Order> getOrders(){
     return List<Order>.from(orders);
   }
+  void removeOrder(String orderId) {
+    final orderIndex = orders.indexWhere((order) => order.id == orderId);
+    if (orderIndex != -1) {
+      orders.removeAt(orderIndex);
+      saveOrders(); // Update Hive box
+    }
+  }
+  void saveOrders() {
+    boxOrders.clear();
+    for (var order in orders) {
+      boxOrders.add(order);
+    }
+  }
   //Method to add new orders in list, and also add it in hive db. 
   void add(Order order){
     boxOrders.put(order.id, order);

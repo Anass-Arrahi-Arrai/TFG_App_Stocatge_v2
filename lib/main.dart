@@ -8,6 +8,9 @@ import 'package:app_stocatge/pages/supplier_manager_page.dart';
 import 'package:app_stocatge/pages/order_page.dart';
 import 'package:app_stocatge/pages/stats_page.dart';
 import 'package:app_stocatge/repositories/boxes.dart';
+import 'package:app_stocatge/repositories/item_repository.dart';
+import 'package:app_stocatge/repositories/order_repository.dart';
+import 'package:app_stocatge/repositories/supplier_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:app_stocatge/pages/check_stock_Page.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -29,13 +32,22 @@ void main() async{
   
   runApp(MyApp());
 }
+void clearAll(){
+  ItemRepository iR = ItemRepository();
+  SupplierRepository iS = SupplierRepository();
+  OrderRepository oS = OrderRepository();
 
+  // iR.boxItems.clear();
+  // iS.boxSuppliers.clear();
+  oS.boxOrders.clear();
+}
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
+  
 
   @override
   Widget build(BuildContext context) {
+    //clearAll();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomePage(),
