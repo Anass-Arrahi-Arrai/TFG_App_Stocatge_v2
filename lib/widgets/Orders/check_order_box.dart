@@ -36,7 +36,7 @@ class checkOrderBox extends StatelessWidget {
       icon: Icon(Icons.fact_check_rounded, size: 60, color: Colors.brown[800]),
       content: Container(
         width: 375,
-        height: 275,
+        height: 375,
         child: Column(
           children: [
            Expanded(
@@ -192,10 +192,46 @@ class checkOrderBox extends StatelessWidget {
               ],
             )),
             Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Container(
+                height: 75,
+                decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: Colors.brown,
+                    width: 3.0,
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "TOTAL AMOUNT: ",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.brown[800],
+                        fontSize: 15
+                      ),
+                    ),
+                    SizedBox(width: 30,),
+                    Text(
+                      "${order.getTotal()}€",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.amber[600],
+                        fontSize: 30
+                      ),
+                    )
+                
+                  ],
+                ),
+              ),
+            ),
+            Padding(
               padding: const EdgeInsets.all(10.0),
               child: Container(
                 height: 50,
-                
                 color: Colors.white,
                 child: MyButton(
                   onPressed: () => {
@@ -211,6 +247,7 @@ class checkOrderBox extends StatelessWidget {
                 )
               ),
             ) 
+          
           ],
         ),
       )

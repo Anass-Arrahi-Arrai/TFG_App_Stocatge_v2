@@ -9,7 +9,6 @@ import 'package:flutter/widgets.dart';
 
 // ignore: must_be_immutable
 class ItemOrderTile extends StatefulWidget {
-  
   final TextEditingController controller;
   final Item item;
   int quantity;
@@ -65,7 +64,7 @@ class _ItemOrderTileState extends State<ItemOrderTile> {
                   ),
                 ),
                 Expanded(
-                  child: TextField(
+                  child: TextFormField(
                     controller: widget.controller,
                     textAlign: TextAlign.left,
                     textAlignVertical: TextAlignVertical.center,
@@ -105,25 +104,8 @@ class _ItemOrderTileState extends State<ItemOrderTile> {
         ),
       );
   }
-
-  increaseQuantity() {
-    setState(() {
-      widget.quantity +=1;
-      widget.controller.text = widget.quantity.toString();
-    });
-  }
-
-  decreaseQuantity() {
-    setState(() {
-      if (widget.quantity>0){
-        widget.quantity -=1;
-        widget.controller.text = widget.quantity.toString();
-      }
-    });
-  }
   
   void updateQuantityFromTextField() {
-    print(widget.controller.text);
     final text = widget.controller.text;
     if (text.isNotEmpty) {
       final number = int.tryParse(text);

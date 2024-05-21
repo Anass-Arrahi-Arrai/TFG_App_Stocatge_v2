@@ -15,7 +15,8 @@ class NewItemBox extends StatelessWidget {
   final formatController = TextEditingController();
 
   final SupplierRepository  sR = SupplierRepository();
-  
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -32,49 +33,60 @@ class NewItemBox extends StatelessWidget {
       iconPadding: EdgeInsets.zero,
       icon: Icon(Icons.fastfood, size: 60, color: Colors.brown[800]),
       backgroundColor: Colors.brown[200],
-      content: Container(
-        width: 375,
-        height: 270,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              flex: 4,
-              child: Container(
-                decoration: BoxDecoration(
-                color: Colors.brown,
-                borderRadius: BorderRadius.circular(10)
-              ),
-                child: ListView(
-                  children: [
-                    FormTile(dataName: "Product Name",controller: nameController),
-                    FormTile(dataName: "Price",controller: priceController),
-                    FormTile(dataName: "Format (kg, bag, piece)",controller: formatController),
-                    const SizedBox(height: 10)
-                  ],
+      content: Form(
+        key: _formKey,
+        child: Container(
+          width: 375,
+          height: 270,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                flex: 4,
+                child: Container(
+                  decoration: BoxDecoration(
+                  color: Colors.brown,
+                  borderRadius: BorderRadius.circular(10)
+                ),
+                  child: ListView(
+                    children: [
+                      FormTile(dataName: "Product Name",controller: nameController,validator: validateNotEmpty,),
+                      FormTile(dataName: "Price",controller: priceController, validator: validateNotEmpty,),
+                      FormTile(dataName: "Format (kg, bag, piece)",controller: formatController, validator: validateNotEmpty,),
+                      const SizedBox(height: 10)
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    MyButton(text: "Save", onPressed: handleSave),
-                    const SizedBox(width: 10),
-                    MyButton(
-                      text: "Cancel", 
-                      onPressed: (
-                        () => Navigator.of(context).pop()
-                      ),
-                      )
-                  ],
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      MyButton(text: "Save", onPressed: (){
+                          if (_formKey.currentState?.validate() ?? false) {
+                            handleSave();
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Please correct the errors')),
+                            );
+                          }
+                      }),
+                      const SizedBox(width: 10),
+                      MyButton(
+                        text: "Cancel", 
+                        onPressed: (
+                          () => Navigator.of(context).pop()
+                        ),
+                        )
+                    ],
+                  ),
                 ),
-              ),
-            )
-          ]
-          
+              )
+            ]
+            
+          ),
         ),
       ),
     );
@@ -88,5 +100,12 @@ class NewItemBox extends StatelessWidget {
       'format': formatController.text,
     };
     onSave(newItemData);
+  }
+
+  String? validateNotEmpty(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'This field cannot be empty';
+    }
+    return null;
   }
 }

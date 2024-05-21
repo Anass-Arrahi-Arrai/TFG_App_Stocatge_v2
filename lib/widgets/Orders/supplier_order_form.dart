@@ -26,7 +26,9 @@ class _SupplierItemsFormState extends State<SupplierItemsForm> {
   
   final ItemRepository iRepo = ItemRepository();
   final List<TextEditingController> _controllers = [];
+  final List<GlobalKey<FormState>> _formKeys = [];
   final OrderRepository oRepo = OrderRepository();
+  final _formKey = GlobalKey<FormState>();
   
   @override
   void initState() {
@@ -35,16 +37,16 @@ class _SupplierItemsFormState extends State<SupplierItemsForm> {
     if (items != null) {
       for (int i = 0; i < items.length; i++) {
         _controllers.add(TextEditingController());
+        _formKeys.add(GlobalKey<FormState>());
       }
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
     
     List<Item>? items = iRepo.items[widget.supplier.name];
-
+    
     
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -99,7 +101,12 @@ class _SupplierItemsFormState extends State<SupplierItemsForm> {
                 child: ListView.builder(
                     itemCount: items.length,
                     itemBuilder: (context, index) {
-                      return ItemOrderTile(controller: _controllers[index], item: items[index]);
+                      return Form(
+                        key: _formKeys[index],
+                        child: ItemOrderTile(
+                          controller: _controllers[index], 
+                          item: items[index], 
+                      ));
                     },
                   ),
               )
@@ -110,22 +117,25 @@ class _SupplierItemsFormState extends State<SupplierItemsForm> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    // ignore: prefer_is_empty
-                    items != null && items.isNotEmpty ? MyButton(text: "Save", onPressed: handleSave,) : MyButton(text: "Save", onPressed: handleSave, isEnabled: false,),
+                    items != null && items.isNotEmpty ? 
+                    MyButton(
+                      text: "Save", 
+                      onPressed: () => checkListEmpty(),
+                    ) 
+                    : 
+                    MyButton(text: "Save", onPressed: (){}, isEnabled: false,),
                     const SizedBox(width: 10),
                     MyButton(
                       text: "Cancel", 
                       onPressed: (
                         () => Navigator.of(context).pop()
                       ),
-                      )
+                    )
                   ],
                 ),
               ),
             )
           ],
-          
-          
         ),
       ),
     );
@@ -138,13 +148,64 @@ class _SupplierItemsFormState extends State<SupplierItemsForm> {
     if(items!=null){
       for (var idx = 0 ; idx<items.length  ; idx++ ){
         int quantity = int.tryParse(_controllers[idx].text) ?? 0;
-        orderItems.add(OrderItem(item: items[idx], quantity: quantity));
+        if(quantity>0){
+          orderItems.add(OrderItem(item: items[idx], quantity: quantity));
+        }
       }
     }
     orderItems.forEach((element) {element.printOrderItem();});
     //Create Order
-    Order order = Order(supplierName: widget.supplier.getName, items: orderItems);
-    
-    widget.onSave(order);
+    if(orderItems.isNotEmpty){
+      Order order = Order(supplierName: widget.supplier.getName, items: orderItems);
+      widget.onSave(order);
+    }
+  }
+  
+  void checkListEmpty() {
+    bool allEmpty = true;
+    for (var controller in _controllers) {
+      if (controller.text.isNotEmpty) {
+        allEmpty = false;
+        break;
+      }
+    }
+    if (!allEmpty) {
+      handleSave();
+      Navigator.of(context).pop();  
+    }else {
+      showDialog(
+        context: context, 
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: Colors.red[200],
+            title: Text(
+              "ERROR",
+              style: TextStyle(
+                fontSize: 25,
+                color: Colors.brown[800],
+                fontWeight: FontWeight.bold
+              ),
+            ),
+            content: const Text("All fields are empty. Please enter some values."),
+            actions: [
+              TextButton(
+                child: Text(
+                  "OK",
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.brown[800],
+                    fontWeight: FontWeight.bold
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+                      
   }
 }
