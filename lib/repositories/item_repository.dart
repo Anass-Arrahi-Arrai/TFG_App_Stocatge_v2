@@ -16,11 +16,11 @@ class ItemRepository {
     boxItems = Hive.box<Item>('itemsBox');
     loadItems();
   }
-  List<Item>? getItems(String supplier){
-    if(items[supplier]==Null){
-      return [];
+  List<Item> getItems(String supplier){
+    if(items[supplier]!=null){
+      return items[supplier] as List<Item>;
     }
-    return items[supplier];
+    return [];
   }
   // Load All supplier items from db
   void loadItems() {
@@ -69,7 +69,7 @@ class ItemRepository {
         print("Items for $supName:");
         for (var item in items) {
             
-            print("   ${item.productId}: ${item.productName},${item.unitPrice},${item.itemFormat} "); // Print each item's product name
+            print("   ${item.productId}: ${item.itemType}: ${item.productName},${item.unitPrice},${item.itemFormat} "); // Print each item's product name
         }
         print("");  // Add a blank line for better readability between suppliers
     });

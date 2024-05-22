@@ -23,6 +23,6 @@ class OrderItem extends HiveObject{
   }
   
   void printOrderItem(){
-    print("Id: ${item.productId}, ${item.productName}, quantity: $quantity, total price: $totalPrice");
+    print("Id: ${item.productId}, type: ${item.itemType}, ${item.productName}, quantity: $quantity, total price: $totalPrice, ");
   }
 }

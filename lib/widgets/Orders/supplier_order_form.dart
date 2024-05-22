@@ -2,7 +2,7 @@ import "package:app_stocatge/models/order.dart";
 import "package:app_stocatge/models/orderItem.dart";
 import "package:app_stocatge/repositories/item_repository.dart";
 import "package:app_stocatge/repositories/order_repository.dart";
-import "package:app_stocatge/widgets/Orders/item_order_tile.dart";
+import "package:app_stocatge/widgets/Items/item_order_tile.dart";
 import "package:app_stocatge/widgets/my_button.dart";
 import "package:app_stocatge/widgets/share_order_box.dart";
 import "package:flutter/material.dart";
@@ -158,7 +158,7 @@ class _SupplierItemsFormState extends State<SupplierItemsForm> {
     if(orderItems.isNotEmpty){
       Order order = Order(supplierName: widget.supplier.getName, items: orderItems);
       widget.onSave(order);
-    }
+    } 
   }
   
   void checkListEmpty() {
@@ -171,7 +171,6 @@ class _SupplierItemsFormState extends State<SupplierItemsForm> {
     }
     if (!allEmpty) {
       handleSave();
-      Navigator.of(context).pop();  
     }else {
       showDialog(
         context: context, 

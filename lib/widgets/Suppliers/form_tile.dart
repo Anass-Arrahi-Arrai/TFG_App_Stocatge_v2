@@ -1,16 +1,21 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors
+import 'package:app_stocatge/utilities/text_form_field_doubles.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 
 class FormTile extends StatelessWidget { 
   final TextEditingController controller;
   final String dataName;
   final String? Function(String?)? validator;
+  final bool isNumber;
   
   FormTile({
     super.key, 
     required this.dataName,
     required this.controller,
+    this.isNumber = false,
     this.validator,
   });
 
@@ -38,7 +43,10 @@ class FormTile extends StatelessWidget {
                   width: 10,
                 ),
                 Expanded(
+                  
                   child: TextFormField(
+                    keyboardType: (isNumber)  ? TextInputType.number: null,
+                    inputFormatters: (isNumber)  ? [DecimalTextInputFormatter(decimalRange: 2)] : null,
                     validator: validator,
                     controller: controller,
                     textAlign: TextAlign.left,

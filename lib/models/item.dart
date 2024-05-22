@@ -16,12 +16,20 @@ class Item extends HiveObject {
   double unitPrice;
   @HiveField(4)
   String ?itemFormat;
-
+  @HiveField(5)
+  String ?itemType;
+  @HiveField(6)
+  int lotQuantity;
+  @HiveField(7)
+  String uom;
 
   Item({
     required this.supplierItem,
     required this.productName,
     required this.unitPrice,
+    required this.lotQuantity,
+    required this.uom,
+    this.itemType,
     this.itemFormat,
   });
 

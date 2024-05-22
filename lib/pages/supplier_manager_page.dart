@@ -6,7 +6,7 @@ import "package:app_stocatge/repositories/item_repository.dart";
 import "package:app_stocatge/widgets/Suppliers/modify_supplier_box.dart";
 import "package:app_stocatge/widgets/Suppliers/new_supplier_box.dart";
 import "package:app_stocatge/widgets/Suppliers/supplier_tile.dart";
-import "package:app_stocatge/widgets/Suppliers/new_item_box.dart";
+import "package:app_stocatge/widgets/Items/new_item_box.dart";
 import "package:flutter/material.dart";
 import '../models/supplier.dart';
 import '../repositories/supplier_repository.dart';
@@ -62,7 +62,11 @@ class _SupplierManagerState extends State<SupplierManager> {
     double price = double.parse(newItemData['price'].toString());
     String format = newItemData['format'].toString();
     Supplier supplier = repository.allSuppliers.elementAt(index);
-    Item newItem = Item(productName: name, unitPrice: price, supplierItem: supplier.name, itemFormat: format);
+    String type = newItemData['type'].toString();
+    String uom = newItemData['uom'].toString();
+    int lotQuantity = int.parse(newItemData['lotQuantity'].toString());
+
+    Item newItem = Item(productName: name, unitPrice: price, supplierItem: supplier.name, itemFormat: format, itemType: type, lotQuantity: lotQuantity, uom: uom);
     setState(() {
       itemRepo.setNewItem(supplier.getName,newItem);//repository.allSuppliers.elementAt(index).getItems();
     });
