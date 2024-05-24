@@ -43,7 +43,6 @@ class FormTile extends StatelessWidget {
                   width: 10,
                 ),
                 Expanded(
-                  
                   child: TextFormField(
                     keyboardType: (isNumber)  ? TextInputType.number: null,
                     inputFormatters: (isNumber)  ? [DecimalTextInputFormatter(decimalRange: 2)] : null,
@@ -62,7 +61,6 @@ class FormTile extends StatelessWidget {
                       contentPadding: EdgeInsets.only(left: 10.0, right: 10.0),
                       border: OutlineInputBorder( // Normal border
                         borderRadius: BorderRadius.circular(8),
-                         // Red border color
                       ),
                       focusedBorder: OutlineInputBorder( // Border when TextField is focused
                         borderRadius: BorderRadius.circular(8),

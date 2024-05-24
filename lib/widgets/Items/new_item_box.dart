@@ -121,7 +121,7 @@ class _NewItemBoxState extends State<NewItemBox> {
                             FormTileDropDown(
                               key: _dropdownKeyType,
                               dataName: 'Type',
-                              options: FoodAndFormatTypes.types,
+                              options: FoodAndFormatTypes.types.keys.toList(),
                               validator: validateNotEmpty,
                             ),
                             FormTile(

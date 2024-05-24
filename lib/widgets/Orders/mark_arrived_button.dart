@@ -12,6 +12,7 @@ class MarkArrivedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Opacity(
       opacity: isEnabled ? 1: 0.4,
       child: Container(

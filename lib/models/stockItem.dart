@@ -1,12 +1,25 @@
-import 'item.dart';
 
-class StockItem {
-  Item item;
+import 'package:hive/hive.dart';
+part 'stockItem.g.dart';
 
-  int quantity;
+@HiveType(typeId: 5)
+class StockItem{
 
-  StockItem({
-    required this.item,
-    required this.quantity,
+  @HiveField(0)
+  String itemType;
+  @HiveField(1)
+  double quantity;
+  @HiveField(2)
+  String itemFormat;
+
+
+  StockItem ({
+    required this.itemFormat,
+    required this.itemType,
+    required this.quantity
   });
+
+  
+
+
 }

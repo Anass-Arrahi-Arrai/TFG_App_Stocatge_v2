@@ -2,6 +2,7 @@
 
 import "package:app_stocatge/repositories/item_repository.dart";
 import "package:app_stocatge/repositories/order_repository.dart";
+import "package:app_stocatge/repositories/stock_repository.dart";
 import "package:app_stocatge/widgets/Orders/order_tile.dart";
 import "package:app_stocatge/widgets/share_order_box.dart";
 import "package:flutter/material.dart";
@@ -22,6 +23,18 @@ class OrdersPage extends StatefulWidget {
 class _OrdersPageState extends State<OrdersPage> {
   final ItemRepository itemRep = ItemRepository();
   final OrderRepository orderRep = OrderRepository();
+  final StockRepository stockRep = StockRepository();
+  
+
+  void updateStock(Order order) {
+    setState(() {
+      for (var orderItem in order.items) {
+        stockRep.addStock(orderItem);
+      }
+      
+    });
+  }
+  
   
   void saveOrder(Order order){
     Navigator.of(context).pop();
@@ -173,7 +186,8 @@ class _OrdersPageState extends State<OrdersPage> {
                       onTap: () => checkOrder(orderRep.getOrders()[index]),
                       child: OrderTile(
                         order: orderRep.getOrders()[index], 
-                        onDelete: (context) => deleteOrder(orderRep.getOrders()[index]),
+                        onDelete: (context) => deleteOrder(orderRep.getOrders()[index]), 
+                        onDelivered: (context) => updateStock(orderRep.getOrders()[index]),
                         ));
                   },
                   

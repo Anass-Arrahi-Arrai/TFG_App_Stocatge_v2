@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors
+import 'package:app_stocatge/repositories/order_repository.dart';
 import 'package:app_stocatge/widgets/Orders/mark_arrived_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,12 +11,14 @@ import '../../models/order.dart';
 class OrderTile extends StatefulWidget { 
 
   final Order order;
-  
+  final OrderRepository oR = OrderRepository();
   Function(BuildContext)? onDelete;
+  Function(BuildContext)? onDelivered;
   OrderTile({
     super.key, 
     required this.order,
     required this.onDelete,
+    required this.onDelivered,
   });
 
   @override
@@ -23,9 +26,17 @@ class OrderTile extends StatefulWidget {
 }
 
 class _OrderTileState extends State<OrderTile> {
-  @override
   //Update orders
 
+  void markAsDelivered(BuildContext context) {
+    if (widget.onDelivered != null) {
+      widget.onDelivered!(context);
+    }
+    setState(() {
+      widget.order.received = true;
+      widget.oR.updateOrder(widget.order);
+    });
+  }
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
@@ -87,10 +98,10 @@ class _OrderTileState extends State<OrderTile> {
                     width: 10,
                   ),
                   Expanded(
-                    
                     child: MarkArrivedButton(
-                      onPressed: () => {},
-                      text: "Mark Delivered",
+                      isEnabled: !widget.order.received,
+                      onPressed: () => markAsDelivered(context),
+                      text: widget.order.received ? "Delivered" : "Mark Delivered",
                     )
                   ),
               

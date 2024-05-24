@@ -42,4 +42,12 @@ class OrderRepository {
       orders.add(element);
     }
   }
+  
+  void updateOrder(Order updatedOrder) {
+    final orderIndex = orders.indexWhere((order) => order.id == updatedOrder.id);
+    if (orderIndex != -1) {
+      orders[orderIndex] = updatedOrder;
+      boxOrders.put(updatedOrder.id, updatedOrder); // Update Hive box
+    }
+  }
 }

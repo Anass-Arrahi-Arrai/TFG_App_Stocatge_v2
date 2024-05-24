@@ -24,7 +24,7 @@ class ItemRepository {
   }
   // Load All supplier items from db
   void loadItems() {
-    items.clear();  // Limpiar el mapa existente para rellenar con nuevos datos.
+    items.clear();  
     for (var item in boxItems.values) {
       if (!items.containsKey(item.supplierItem)) {
         items[item.supplierItem] = [];
@@ -32,15 +32,7 @@ class ItemRepository {
       items[item.supplierItem]!.add(item);
     }
   }
-  //Save items
-  void saveItems(){
-    boxItems.clear();  // Limpia la caja antes de guardar los nuevos valores.
-    for (var itemList in items.values) {
-      for (var item in itemList) {
-        boxItems.add(item);  // Agregar cada ítem a la caja de Hive.
-      }
-    }
-  }
+
 
   //Set new item to supplier
   void setNewItem(String supName, Item newItem){

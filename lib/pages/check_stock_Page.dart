@@ -1,14 +1,8 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, collection_methods_unrelated_type, unused_local_variable
 
-import "package:app_stocatge/models/item.dart";
-import "package:app_stocatge/models/supplier.dart";
-import "package:app_stocatge/repositories/item_repository.dart";
-import "package:app_stocatge/repositories/order_repository.dart";
-import "package:app_stocatge/repositories/supplier_repository.dart";
+import "package:app_stocatge/repositories/stock_repository.dart";
+import "package:app_stocatge/widgets/stock/type_stock_tile.dart";
 import "package:flutter/material.dart";
-import "package:hive/hive.dart";
-
-import "../models/order.dart";
 
 //Stateles widgets mai canvien les coses en pantalla, els statefull sí canvien depenent del estat!!
 class CheckStockPage extends StatefulWidget {
@@ -20,6 +14,7 @@ class CheckStockPage extends StatefulWidget {
 
 class _CheckStockPageState extends State<CheckStockPage> {
   // UI
+  StockRepository sR = StockRepository();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,17 +52,23 @@ class _CheckStockPageState extends State<CheckStockPage> {
           Expanded(
             flex: 11,
             child: Padding(
-              padding: const EdgeInsets.only(left: 25.0, bottom: 25.0, right: 25.0),
+              padding:
+                  const EdgeInsets.only(left: 25.0, bottom: 25.0, right: 25.0),
               child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  color: Colors.brown[300]
-                ),
-                child: ListView(
-                  
-                  
-                )
-              ),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      color: Colors.brown[300]),
+                  child: ListView.builder(
+                    itemCount: sR.types.length,
+                    itemBuilder: (context, index) {
+                      
+                      return TypeStockTile(
+                        quantity: sR.stocks[index], 
+                        itemType: sR.types[index],
+                        idx: index
+                        );
+                    },
+                  )),
             ),
           ),
         ],
