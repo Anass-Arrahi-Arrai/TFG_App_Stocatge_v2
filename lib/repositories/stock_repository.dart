@@ -69,9 +69,20 @@ class StockRepository {
     }
   }
 
+  void removeStockByIdx(int idx, double quantity) {
+    if (idx != -1) {
+      stocks[idx] = (stocks[idx] - quantity).clamp(0, double.infinity);
+      saveStock();
+    }
+  }
+
   double getStockQuantity(String itemType) {
     int index = types.indexOf(itemType);
     return index != -1 ? stocks[index] : 0.0;
+  }
+
+  double getStockQuantityByIdx(int idx) {
+    return idx != -1 ? stocks[idx] : 0.0;
   }
 
   void printStock() {

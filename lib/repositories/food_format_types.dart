@@ -12,6 +12,7 @@ class FoodAndFormatTypes {
     'DARK CHOCOLATE':'KG',
     'EMULSIFIER':'KG',
     'CHOCOLATE RICE':'KG',
+
   };
   static const List<String> uom = [
     'Kg',

@@ -6,9 +6,11 @@ class TypeStockTile extends StatelessWidget {
   final String itemType;
   final double quantity;
   final int idx;
+  final Function(BuildContext) onUpdate; 
 
-  const TypeStockTile({
+  TypeStockTile({
     super.key,
+    required this.onUpdate,
     required this.itemType,
     required this.quantity,
     required this.idx,
@@ -106,7 +108,7 @@ class TypeStockTile extends StatelessWidget {
                       width: 2
                     )
                   ),
-                  onPressed: () { },
+                  onPressed: () => onUpdate(context),
                   textColor: Colors.brown,
                   disabledColor: Colors.grey[800],
                   splashColor: Colors.brown[300],
