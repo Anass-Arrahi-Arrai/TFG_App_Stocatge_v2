@@ -50,9 +50,9 @@ class Order extends HiveObject{
   }
 
   String itemsToString(){
-    String items = "NAME  -   QUANTITY \n -------------------------------\n";
+    String items = "PRODUCT - FORMAT - QUANTITY\n ------------------------------------------------------------\n";
     for (var element in this.items) {
-      items += "${element.item.productName}      -      ${element.quantity} \n";
+      items += "${element.item.productName}     -     ${element.item.lotQuantity}${element.item.uom} ${element.item.itemFormat}     -      ${element.quantity}\n";
     }
     return items;
   }

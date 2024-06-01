@@ -56,7 +56,7 @@ class _ItemOrderTileState extends State<ItemOrderTile> {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "(${widget.item.itemFormat!})",
+                      "(${widget.item.lotQuantity}${widget.item.uom} ${widget.item.itemFormat!})",
                       style: TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.w400,

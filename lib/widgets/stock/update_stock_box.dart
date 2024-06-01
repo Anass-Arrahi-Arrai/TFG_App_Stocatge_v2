@@ -28,7 +28,7 @@ class UpdateStockBox extends StatelessWidget {
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       title: Text(
-        "Check Order",
+        "Update ${sR.types[idx]} value",
         style: TextStyle(
           fontWeight: FontWeight.bold,
           color: Colors.brown[800],
@@ -45,7 +45,7 @@ class UpdateStockBox extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  "Update ${sR.types[idx]} value",
+                  "Put in the form the quanity used",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -63,7 +63,7 @@ class UpdateStockBox extends StatelessWidget {
                         fontSize: 14,
                       ),
                       decoration: InputDecoration(
-                        hintText: 'Enter quantity used',
+                        hintText: 'Enter here quantity used',
                         hintStyle: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,

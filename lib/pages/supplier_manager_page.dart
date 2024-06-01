@@ -45,7 +45,7 @@ class _SupplierManagerState extends State<SupplierManager> {
 
     String name = newSupplierData['name'].toString();
     String nif = newSupplierData['nif'].toString();
-    String address = newSupplierData['adress'].toString();
+    String address = newSupplierData['address'].toString();
     String email = newSupplierData['email'].toString();
     String number = newSupplierData['num'].toString();
 

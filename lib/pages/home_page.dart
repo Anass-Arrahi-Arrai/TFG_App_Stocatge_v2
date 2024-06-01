@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Padding(
           padding: EdgeInsets.only(top: 10),
-          child: Text("Stockify v1.1",
+          child: Text("Stock-it by Anass Arrahi Arrai",
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -29,29 +29,11 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.logout),
+            icon: Icon(Icons.info_outlined),
             color: Colors.white,
           ),
         ],
       ),
-      drawer: Drawer(
-          backgroundColor: Colors.brown[100],
-          child: Column(
-            children: [
-              DrawerHeader(
-                child: Icon(
-                  Icons.favorite,
-                  size: 48,
-                ),
-              ),
-              ListTile(
-                leading: Icon(Icons.home),
-                title: Text("H O M E"),
-                onTap: () {},
-              )
-            ],
-          )
-        ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

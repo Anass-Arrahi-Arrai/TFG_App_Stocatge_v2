@@ -59,53 +59,59 @@ class _NewItemBoxState extends State<NewItemBox> {
       iconPadding: EdgeInsets.zero,
       icon: Icon(Icons.fastfood, size: 60, color: Colors.brown[800]),
       backgroundColor: Colors.brown[200],
-      content: Column(
-        children: [
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              "Current Items",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.brown[800],
+      content: SingleChildScrollView(
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "Current Items",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.brown[800],
+                ),
               ),
-              
             ),
-          ),
-          Expanded(
-            child: Container(
+            Container(
               width: 375,
+              height: 150,
               decoration: BoxDecoration(
                 color: Colors.brown,
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: ListView.builder(
+              child: iR.getItems(supplierName).isNotEmpty? 
+              ListView.builder(
                 itemCount: iR.getItems(supplierName).length,
                 itemBuilder: (context, index) {
                   Item item = iR.getItems(supplierName)[index];
                   return ItemTile(name: item.productName, format: item.itemFormat!, quant: item.lotQuantity, uom: item.uom, price: item.unitPrice);
-              },),
+                  
+                  },
+                ) :
+                const Center(
+                  child: Text(
+                      "NO ITEMS YET",
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                    )
+                ),
             ),
-          ),
-          SizedBox(height: 10,),
-          Align(
-            alignment: Alignment.centerLeft ,
-            child: Text(
-              "New item form",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.brown[800],
+            SizedBox(height: 10,),
+            Align(
+              alignment: Alignment.centerLeft ,
+              child: Text(
+                "New item form",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.brown[800],
+                ),
               ),
-              
             ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Form(
+            Form(
               key: _formKey,
               child: Container(
                 width: 375,
-                height: 270,
+                height: 435,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -116,7 +122,7 @@ class _NewItemBoxState extends State<NewItemBox> {
                           color: Colors.brown,
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: ListView(
+                        child: Column(
                           children: [
                             FormTileDropDown(
                               key: _dropdownKeyType,
@@ -144,14 +150,6 @@ class _NewItemBoxState extends State<NewItemBox> {
                                     controller: lotQController,
                                     validator: validateNotEmptyAndNegative,
                                     isNumber: true,
-                                  ),
-                                ),
-                                Expanded(
-                                  child: FormTileDropDown(
-                                    key: _dropdownKeyUOM,
-                                    dataName: 'U.O.M',
-                                    options: FoodAndFormatTypes.uom,
-                                    validator: validateNotEmpty,
                                   ),
                                 ),
                               ],
@@ -200,22 +198,21 @@ class _NewItemBoxState extends State<NewItemBox> {
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
   void handleSave() {
     final selecteType = _dropdownKeyType.currentState?.selectedOption;
-    final selectedUOM = _dropdownKeyUOM.currentState?.selectedOption;
     final selectedFormat = _dropdownKeyFormat.currentState?.selectedOption;
     Map<String, String> newItemData = {
       'name': nameController.text,
       'type': selecteType ?? '',
       'price': priceController.text,
       'format': selectedFormat ?? '',
-      'uom':selectedUOM ?? '',
+      'uom': FoodAndFormatTypes.types[selecteType] ?? '',
       'lotQuantity': lotQController.text
     };
     widget.onSave(newItemData);

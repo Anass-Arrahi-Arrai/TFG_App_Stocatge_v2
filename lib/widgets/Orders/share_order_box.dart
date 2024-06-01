@@ -31,16 +31,7 @@ class _ShareOrderBoxState extends State<ShareOrderBox> {
         body: orderDetails,
       );
       await launchUrl(Uri.parse(mailtoLink.toString()));
-    } else if(method == 'whatsapp'){
-      final Uri whatsappUri = Uri(
-        scheme: 'https',
-        host: 'api.whatsapp.com',
-        path: '/send',
-        queryParameters: {
-          'text': orderDetails,
-        },
-      );
-    }
+    } 
     else{
       Share.share(orderDetails);//per alguna rao no funciona
     } 

@@ -4,7 +4,7 @@ import "package:app_stocatge/repositories/item_repository.dart";
 import "package:app_stocatge/repositories/order_repository.dart";
 import "package:app_stocatge/repositories/stock_repository.dart";
 import "package:app_stocatge/widgets/Orders/order_tile.dart";
-import "package:app_stocatge/widgets/share_order_box.dart";
+import "package:app_stocatge/widgets/Orders/share_order_box.dart";
 import "package:flutter/material.dart";
 
 import "../models/order.dart";

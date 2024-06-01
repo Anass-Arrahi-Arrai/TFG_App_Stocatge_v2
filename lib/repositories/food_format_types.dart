@@ -20,10 +20,10 @@ class FoodAndFormatTypes {
     'L'
   ];
   static const List<String> format = [
-    'Bag',
-    'Box',
-    'Can',
-    'Jug',
-    'Drum', 
+    'BAG',
+    'BOX',
+    'CAN',
+    'BOTTLE',
+    'JERRYCAN'
   ];
 }

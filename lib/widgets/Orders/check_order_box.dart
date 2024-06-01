@@ -2,7 +2,7 @@
 
 import 'package:app_stocatge/repositories/supplier_repository.dart';
 import 'package:app_stocatge/widgets/my_button.dart';
-import 'package:app_stocatge/widgets/share_order_box.dart';
+import 'package:app_stocatge/widgets/Orders/share_order_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -24,7 +24,7 @@ class checkOrderBox extends StatelessWidget {
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       title: Text(
-        "Check Order", 
+        "Check ${supplier.getName} Order ", 
         style: TextStyle(
           fontWeight: FontWeight.bold,
           color: Colors.brown[800],
@@ -78,6 +78,16 @@ class checkOrderBox extends StatelessWidget {
                             ),
                             Expanded(
                               child: Text(
+                                "Format",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.brown[800],
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              )
+                            ),
+                            Expanded(
+                              child: Text(
                                 "Quantity",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
@@ -97,10 +107,20 @@ class checkOrderBox extends StatelessWidget {
                                 padding: EdgeInsets.only(left: 10, right: 10, top: 5),
                                 child: Row(
                                   children: [
-                                    Text("${index+1}. "),
+                                    Text("${index+1}.    "),
                                     Expanded(
                                       child: Text(
                                         "${order.items[index].item.productName}",
+                                        textAlign: TextAlign.start,
+                                        style: TextStyle(
+                                          color: Colors.brown[800],
+                                          fontWeight: FontWeight.w400,
+                                          ),
+                                        )
+                                      ),
+                                    Expanded(
+                                      child: Text(
+                                        "${order.items[index].item.lotQuantity} ${order.items[index].item.uom} ${order.items[index].item.itemFormat}",
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           color: Colors.brown[800],
@@ -128,67 +148,7 @@ class checkOrderBox extends StatelessWidget {
                     ),
                   )),
                   SizedBox(width: 10,),
-                  Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(
-                        color: Colors.brown,
-                        width: 3.0,
-                      ),
-                    ),
-                    child: Column(
-                      children: [
-                        SizedBox(height: 10),
-                        Text(
-                          "SUPPLIER DATA",
-                          style: TextStyle(
-                            color: Colors.brown[800],
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 5),
-                        Expanded(
-                            child: ListView.builder(
-                              itemCount: supData.length,
-                              itemBuilder: (context, index) {
-                                return Padding(
-                                  padding: const EdgeInsets.only(left: 10, right: 10),
-                                  child: Row( 
-                                    children: [
-                                      Expanded(
-                                        child: Text(
-                                          "${toSentenceCase(supData.keys.toList()[index])}:",
-                                          textAlign: TextAlign.end,
-                                          style: TextStyle(
-                                              color: Colors.brown[800],
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(width: 10,),
-                                      Expanded(
-                                        child: Text(
-                                          supData.values.toList()[index] ?? "?",
-                                          textAlign: TextAlign.start,
-                                          style: TextStyle(
-                                              color: Colors.brown[800],
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 10
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                      ],
-                    ),
-                  )),
+                  
               ],
             )),
             Padding(
@@ -216,7 +176,7 @@ class checkOrderBox extends StatelessWidget {
                     ),
                     SizedBox(width: 30,),
                     Text(
-                      "${order.getTotal()}€",
+                      "${order.getTotal().toStringAsFixed(2)}€",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.amber[600],

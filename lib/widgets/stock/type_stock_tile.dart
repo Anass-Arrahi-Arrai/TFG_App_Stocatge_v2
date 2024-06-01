@@ -113,14 +113,9 @@ class TypeStockTile extends StatelessWidget {
                   disabledColor: Colors.grey[800],
                   splashColor: Colors.brown[300],
                   highlightColor: Colors.brown[800],
-                  child: const Text(
-                    "Update",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold
-                    ),
-                  ),
+                  child: const Icon(
+                    Icons.update
+                  )
                 ),
               ),
             ),
