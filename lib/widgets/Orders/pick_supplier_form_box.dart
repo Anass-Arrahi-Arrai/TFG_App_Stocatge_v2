@@ -1,4 +1,4 @@
-// ignore_for_file: sized_box_for_whitespace, prefer_const_constructors
+
 
 import 'package:app_stocatge/repositories/supplier_repository.dart';
 import 'package:app_stocatge/widgets/Orders/supplier_order_form.dart';
@@ -71,7 +71,7 @@ class _PickSupplierToOrderBoxState extends State<PickSupplierFormBox> {
                 )
                 :
                 ListView.builder(
-                  itemCount: suppliers.length,  // Number of items in the list
+                  itemCount: suppliers.length,  
                   itemBuilder: (context, index) {
                     return SupplierButton(text: suppliers[index].name, onPressed: () => widget.onPicked(suppliers[index]));
                   },

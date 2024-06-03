@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+
 
 import 'package:app_stocatge/models/item.dart';
 import 'package:app_stocatge/widgets/circle_button.dart';
@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
-// ignore: must_be_immutable
+
 class ItemOrderTile extends StatefulWidget {
   
   final TextEditingController controller;
@@ -24,7 +24,7 @@ class _ItemOrderTileState extends State<ItemOrderTile> {
   
   @override
   void initState() {
-    // TODO: implement initState
+    
     super.initState();
     widget.controller.addListener(updateQuantityFromTextField);
   }
@@ -81,13 +81,13 @@ class _ItemOrderTileState extends State<ItemOrderTile> {
                         fontStyle: FontStyle.italic,
                       ),
                       contentPadding: EdgeInsets.only(left: 10.0, right: 10.0),
-                      border: OutlineInputBorder( // Normal border
+                      border: OutlineInputBorder( 
                         borderRadius: BorderRadius.circular(8),
-                         // Red border color
+                         
                       ),
-                      focusedBorder: OutlineInputBorder( // Border when TextField is focused
+                      focusedBorder: OutlineInputBorder( 
                         borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color: Colors.brown, width: 1.5), // Blue border color
+                        borderSide: BorderSide(color: Colors.brown, width: 1.5), 
                       ),
 
                       filled: false,

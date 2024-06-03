@@ -1,5 +1,5 @@
 
-// ignore_for_file: avoid_print
+
 
 import 'package:app_stocatge/models/item.dart';
 import 'package:hive/hive.dart';
@@ -22,7 +22,7 @@ class ItemRepository {
     }
     return [];
   }
-  // Load All supplier items from db
+  
   void loadItems() {
     items.clear();  
     for (var item in boxItems.values) {
@@ -34,16 +34,16 @@ class ItemRepository {
   }
 
 
-  //Set new item to supplier
+  
   void setNewItem(String supName, Item newItem){
     if (!items.containsKey(supName)) {
       items[supName] = [];
     }
-    items[supName]!.add(newItem);  // Agregar el nuevo ítem a la lista del proveedor.
+    items[supName]!.add(newItem);  
     boxItems.add(newItem);
   }
 
-  //Print items of certain supplier
+  
   void printSupplierItems(String supName){
     print("Items for $supName:\n");
     for (var item in items[supName]!) {
@@ -52,18 +52,18 @@ class ItemRepository {
   }
   
 
-  //Print all items of all suppliers
+  
   void printAllItems() {
-    // Iterate over each supplier in the item repository
+    
     print("hello");
     print(items.length);
     items.forEach((supName, items) {
         print("Items for $supName:");
         for (var item in items) {
             
-            print("   ${item.productId}: ${item.itemType}: ${item.productName},${item.unitPrice},${item.itemFormat} "); // Print each item's product name
+            print("   ${item.productId}: ${item.itemType}: ${item.productName},${item.unitPrice},${item.itemFormat} "); 
         }
-        print("");  // Add a blank line for better readability between suppliers
+        print("");  
     });
   }
 

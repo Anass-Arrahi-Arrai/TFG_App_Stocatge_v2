@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 
 import 'package:app_stocatge/repositories/supplier_repository.dart';
 import 'package:app_stocatge/widgets/my_button.dart';

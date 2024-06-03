@@ -15,7 +15,7 @@ class StockRepository {
     boxStock = Hive.box<double>('itemStockBox');
     loadStock();
 
-    // Ensure all types from FoodAndFormatTypes are present
+    
     for (var type in FoodAndFormatTypes.types.keys) {
       if (!types.contains(type)) {
         types.add(type);
@@ -27,10 +27,10 @@ class StockRepository {
   }
 
   void loadStock() {
-    // Initialize the stocks list with 0.0 for each type
+    
     stocks = List<double>.filled(types.length, 0.0);
 
-    // Load existing stock values from boxStock
+    
     for (var key in boxStock.keys) {
       int index = types.indexOf(key);
       if (index != -1) {

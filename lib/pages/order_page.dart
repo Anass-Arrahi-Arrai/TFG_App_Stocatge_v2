@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, unused_element, sort_child_properties_last
+
 
 import "package:app_stocatge/repositories/item_repository.dart";
 import "package:app_stocatge/repositories/order_repository.dart";
@@ -41,7 +41,7 @@ class _OrdersPageState extends State<OrdersPage> {
     showDialog(
       context: context, 
       builder: (context) {
-        //Navigator.of(context).pop();
+        
         return ShareOrderBox(order: order);
       },
     );
@@ -118,7 +118,7 @@ class _OrdersPageState extends State<OrdersPage> {
         ],
       );
     },
-  ) ?? false; // Return false if the dialog is dismissed by tapping outside
+  ) ?? false; 
 }
 
 

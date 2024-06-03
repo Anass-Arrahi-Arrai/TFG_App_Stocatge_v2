@@ -17,7 +17,7 @@ class OrderItem extends HiveObject{
     required this.quantity
   });
 
-  // Método para actualizar la cantidad de un producto
+
   void updateQuantity(int newQuantity) {
     quantity = newQuantity;
   }

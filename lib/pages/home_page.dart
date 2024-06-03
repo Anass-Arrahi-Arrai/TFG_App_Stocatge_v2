@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
 class HomePage extends StatefulWidget {
 
@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 15,
-              )),
+              )), 
         ),
         centerTitle: true,
         backgroundColor: Colors.brown,
@@ -60,10 +60,10 @@ class _HomePageState extends State<HomePage> {
               height: 350,
               child: ListView(
                 children: [ 
-                  GestureDetector( //CheckStock Button
+                  GestureDetector( 
                     onTap: () => Navigator.pushNamed(context, '/checkStock'),
                     child: Container(
-                        //Button 1
+                        
                         width: 200,
                         height: 50,
                         decoration: BoxDecoration(
@@ -93,7 +93,7 @@ class _HomePageState extends State<HomePage> {
                   GestureDetector(
                     onTap: () => Navigator.pushNamed(context, '/orders'),
                     child: Container(
-                      //Button 2
+                      
                       height: 50,
                       decoration: BoxDecoration(
                           color: Colors.brown[100],
@@ -122,7 +122,7 @@ class _HomePageState extends State<HomePage> {
                   GestureDetector(
                     onTap: () => Navigator.pushNamed(context, '/suppliers'),
                     child: Container(
-                      //Button 3
+                      
                       height: 50,
                       decoration: BoxDecoration(
                           color: Colors.brown[50],
@@ -151,7 +151,7 @@ class _HomePageState extends State<HomePage> {
                   GestureDetector(
                     onTap: () => Navigator.pushNamed(context, '/stats'),
                     child: Container(
-                      //Button 4
+                      
                       height: 50,
                       decoration: BoxDecoration(
                           color: Colors.brown[50],

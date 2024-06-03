@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors
+
 import 'package:app_stocatge/repositories/order_repository.dart';
 import 'package:app_stocatge/widgets/Orders/mark_arrived_button.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,7 +26,7 @@ class OrderTile extends StatefulWidget {
 }
 
 class _OrderTileState extends State<OrderTile> {
-  //Update orders
+  
 
   void markAsDelivered(BuildContext context) {
     if (widget.onDelivered != null) {
@@ -64,7 +64,7 @@ class _OrderTileState extends State<OrderTile> {
                   color: Colors.black.withOpacity(0.2),
                   spreadRadius: 2,
                   blurRadius: 5,
-                  offset: Offset(0, 3), // changes position of shadow
+                  offset: Offset(0, 3), 
                 ),
               ],
               ),

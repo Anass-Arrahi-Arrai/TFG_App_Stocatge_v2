@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors
+
 import 'package:app_stocatge/utilities/text_form_field_doubles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -59,12 +59,12 @@ class FormTile extends StatelessWidget {
                         fontSize: 10,
                       ),
                       contentPadding: EdgeInsets.only(left: 10.0, right: 10.0),
-                      border: OutlineInputBorder( // Normal border
+                      border: OutlineInputBorder( 
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      focusedBorder: OutlineInputBorder( // Border when TextField is focused
+                      focusedBorder: OutlineInputBorder( 
                         borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color: Colors.brown, width: 1.5), // Blue border color
+                        borderSide: BorderSide(color: Colors.brown, width: 1.5), 
                       ),
                       filled: false,
                       fillColor: Colors.brown[200],

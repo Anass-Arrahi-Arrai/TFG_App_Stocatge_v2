@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 
 
 import "package:app_stocatge/models/item.dart";
@@ -68,7 +68,7 @@ class _SupplierManagerState extends State<SupplierManager> {
 
     Item newItem = Item(productName: name, unitPrice: price, supplierItem: supplier.name, itemFormat: format, itemType: type, lotQuantity: lotQuantity, uom: uom);
     setState(() {
-      itemRepo.setNewItem(supplier.getName,newItem);//repository.allSuppliers.elementAt(index).getItems();
+      itemRepo.setNewItem(supplier.getName,newItem);
     });
     itemRepo.printAllItems();
     Navigator.of(context).pop();
@@ -133,7 +133,7 @@ class _SupplierManagerState extends State<SupplierManager> {
             ],
           );
         },
-      ) ?? false; // Return false if the dialog is dismissed by tapping outside
+      ) ?? false; 
   }
   void setInactive(int index) async{
     bool confirm = await showConfirmationDialog(context);

@@ -14,7 +14,7 @@ class OrderRepository {
     boxOrders = Hive.box<Order>("orderBox");
     loadOrders();
   }
-  //Method to get all orders
+  
   List<Order> getOrders(){
     return List<Order>.from(orders);
   }
@@ -22,7 +22,7 @@ class OrderRepository {
     final orderIndex = orders.indexWhere((order) => order.id == orderId);
     if (orderIndex != -1) {
       orders.removeAt(orderIndex);
-      saveOrders(); // Update Hive box
+      saveOrders(); 
     }
   }
   void saveOrders() {
@@ -31,12 +31,12 @@ class OrderRepository {
       boxOrders.add(order);
     }
   }
-  //Method to add new orders in list, and also add it in hive db. 
+  
   void add(Order order){
     boxOrders.put(order.id, order);
     orders.add(order);
   }
-  //Method to load all orders from hive db. 
+  
   void loadOrders(){
     for (var element in boxOrders.values) {
       orders.add(element);
@@ -47,7 +47,7 @@ class OrderRepository {
     final orderIndex = orders.indexWhere((order) => order.id == updatedOrder.id);
     if (orderIndex != -1) {
       orders[orderIndex] = updatedOrder;
-      boxOrders.put(updatedOrder.id, updatedOrder); // Update Hive box
+      boxOrders.put(updatedOrder.id, updatedOrder); 
     }
   }
 }

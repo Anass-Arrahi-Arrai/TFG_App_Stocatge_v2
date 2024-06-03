@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, collection_methods_unrelated_type, unused_local_variable
+
 
 import 'package:app_stocatge/repositories/stock_repository.dart';
 import 'package:app_stocatge/widgets/stock/type_stock_tile.dart';
@@ -15,7 +15,7 @@ class CheckStockPage extends StatefulWidget {
 }
 
 class _CheckStockPageState extends State<CheckStockPage> {
-  // UI
+  
   var _formKey = GlobalKey<FormState>();
   StockRepository sR = StockRepository();
 
@@ -42,17 +42,35 @@ class _CheckStockPageState extends State<CheckStockPage> {
           Expanded(
             flex: 0,
             child: Padding(
-              padding: EdgeInsets.all(20),
-              child: Text(
-                "Stock",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
+              padding: EdgeInsets.only(top: 20, bottom: 10, right: 10),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Text(
+                      "Stock",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      "Update\nStock",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 10,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
-          // Text
+          
           Expanded(
             flex: 11,
             child: Padding(

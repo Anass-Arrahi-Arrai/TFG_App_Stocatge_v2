@@ -34,8 +34,8 @@ class TypeStockTile extends StatelessWidget {
                 width:20,
                 child: Text(
                   idx.toString()   ,
-                  softWrap: true, // Ensure text wraps at word boundaries
-                  overflow: TextOverflow.visible, // Handle overflow
+                  softWrap: true, 
+                  overflow: TextOverflow.visible, 
                   textAlign: TextAlign.left,
                 ),
               ),
@@ -49,8 +49,8 @@ class TypeStockTile extends StatelessWidget {
                       top: 5.0, bottom: 5, right: 10),
                   child: Text(
                     itemType,
-                    softWrap: true, // Ensure text wraps at word boundaries
-                    overflow: TextOverflow.visible, // Handle overflow
+                    softWrap: true, 
+                    overflow: TextOverflow.visible, 
                     textAlign: TextAlign.left,
                   ),
                 ),

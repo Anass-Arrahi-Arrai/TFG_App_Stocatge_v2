@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, collection_methods_unrelated_type, unused_local_variable
+
 
 import 'package:app_stocatge/repositories/stock_repository.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +78,7 @@ class UpdateStockBox extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                           borderSide: BorderSide(
                               color: Colors.brown,
-                              width: 1.5), // Brown border color
+                              width: 1.5), 
                         ),
                         filled: false,
                         fillColor: Colors.brown[200],

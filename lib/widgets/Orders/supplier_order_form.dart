@@ -142,7 +142,7 @@ class _SupplierItemsFormState extends State<SupplierItemsForm> {
   }
 
   void handleSave() {
-    //Create All item orders and put it in a list
+    
     List<OrderItem> orderItems = [];
     List<Item>? items = iRepo.items[widget.supplier.name];
     if(items!=null){
@@ -154,7 +154,7 @@ class _SupplierItemsFormState extends State<SupplierItemsForm> {
       }
     }
     orderItems.forEach((element) {element.printOrderItem();});
-    //Create Order
+    
     if(orderItems.isNotEmpty){
       Order order = Order(supplierName: widget.supplier.getName, items: orderItems);
       widget.onSave(order);

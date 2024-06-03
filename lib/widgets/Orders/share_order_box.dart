@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace, prefer_const_literals_to_create_immutables
+
 
 import 'package:app_stocatge/models/order.dart';
 import 'package:app_stocatge/repositories/supplier_repository.dart';
@@ -33,12 +33,12 @@ class _ShareOrderBoxState extends State<ShareOrderBox> {
       await launchUrl(Uri.parse(mailtoLink.toString()));
     } 
     else{
-      Share.share(orderDetails);//per alguna rao no funciona
+      Share.share(orderDetails);
     } 
   }
 
   String generateOrderDetails(Order order) {
-    // Genera el texto del pedido aquí
+    
     return order.toString();
   }
   @override

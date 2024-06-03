@@ -1,4 +1,4 @@
-// ignore_for_file: sized_box_for_whitespace
+
 
 import 'package:app_stocatge/models/supplier.dart';
 import 'package:app_stocatge/widgets/Suppliers/form_tile.dart';

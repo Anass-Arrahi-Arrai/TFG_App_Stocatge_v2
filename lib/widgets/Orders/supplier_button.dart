@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 
-// ignore: must_be_immutable
+
 class SupplierButton extends StatelessWidget {
 
   final String text;
@@ -24,7 +24,7 @@ class SupplierButton extends StatelessWidget {
           height: 40,
           child: Center(
             child: Text(
-              text,  // Display the supplier name dynamically
+              text,  
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.brown[800],
