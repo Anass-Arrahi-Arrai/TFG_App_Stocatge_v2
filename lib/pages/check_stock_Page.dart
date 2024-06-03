@@ -1,8 +1,8 @@
 
 
 import 'package:app_stocatge/repositories/stock_repository.dart';
-import 'package:app_stocatge/widgets/stock/type_stock_tile.dart';
-import 'package:app_stocatge/widgets/stock/update_stock_box.dart';
+import 'package:app_stocatge/widgets/Stock/type_stock_tile.dart';
+import 'package:app_stocatge/widgets/Stock/update_stock_box.dart';
 import 'package:flutter/material.dart';
 
 class CheckStockPage extends StatefulWidget {
