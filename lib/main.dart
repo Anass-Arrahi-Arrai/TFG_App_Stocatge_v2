@@ -49,7 +49,6 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    clearAll();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomePage(),
