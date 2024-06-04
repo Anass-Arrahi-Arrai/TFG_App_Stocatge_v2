@@ -125,7 +125,7 @@ class _OrdersPageState extends State<OrdersPage> {
   @override
   Widget build(BuildContext context) {
    return Scaffold(
-      backgroundColor: Colors.brown[100],
+      backgroundColor: Colors.brown[25],
       appBar: AppBar(
         elevation: 0,
         title: const Padding(

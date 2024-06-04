@@ -147,13 +147,11 @@ class _SupplierManagerState extends State<SupplierManager> {
       });
     }
   }
-  
-  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.brown[100],
+      backgroundColor: Colors.brown[50],
       appBar: AppBar(
         elevation: 0,
         title: const Padding(
@@ -168,6 +166,7 @@ class _SupplierManagerState extends State<SupplierManager> {
         backgroundColor: Colors.brown,
         centerTitle: true,
       ),
+      
       body: Column(
         children: [
           Expanded(

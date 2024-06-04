@@ -37,11 +37,6 @@ class StockRepository {
         stocks[index] = boxStock.get(key, defaultValue: 0.0)!;
       }
     }
-
-    print("Stock loaded from DB:\n");
-    for (int i = 0; i < types.length; i++) {
-      print("${types[i]}: ${stocks[i]}\n");
-    }
   }
 
   void saveStock() {

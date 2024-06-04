@@ -16,13 +16,12 @@ class CheckStockPage extends StatefulWidget {
 
 class _CheckStockPageState extends State<CheckStockPage> {
   
-  var _formKey = GlobalKey<FormState>();
   StockRepository sR = StockRepository();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.brown[25],
       appBar: AppBar(
         title: const Padding(
           padding: EdgeInsets.only(top: 10),

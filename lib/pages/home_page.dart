@@ -1,4 +1,5 @@
 
+import 'package:app_stocatge/repositories/order_repository.dart';
 import 'package:flutter/material.dart';
 class HomePage extends StatefulWidget {
 
@@ -9,6 +10,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  OrderRepository orders = OrderRepository();
   @override
   Widget build(BuildContext context) {
 
@@ -28,7 +30,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.brown,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {orders.printExpensesCurrentMonth();},
             icon: Icon(Icons.info_outlined),
             color: Colors.white,
           ),
@@ -45,7 +47,7 @@ class _HomePageState extends State<HomePage> {
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "Hello Anass.",
+                          "Hello User.",
                           style: TextStyle(
                             color: Colors.green,
                             fontWeight: FontWeight.bold,
