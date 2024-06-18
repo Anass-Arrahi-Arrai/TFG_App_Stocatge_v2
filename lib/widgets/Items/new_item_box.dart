@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:app_stocatge/repositories/food_format_types.dart';
 import 'package:app_stocatge/repositories/item_repository.dart';
 import 'package:app_stocatge/widgets/Items/item_tile.dart';
@@ -129,6 +131,9 @@ class _NewItemBoxState extends State<NewItemBox> {
                               dataName: 'Type',
                               options: FoodAndFormatTypes.types.keys.toList(),
                               validator: validateNotEmpty,
+                              onChanged: (value) {
+                                setState(() {}); // Llama a setState para actualizar la página
+                              },
                             ),
                             FormTile(
                               dataName: "Product Name",
@@ -145,6 +150,7 @@ class _NewItemBoxState extends State<NewItemBox> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Expanded(
+                                  flex: 3,
                                   child: FormTile(
                                     dataName: "Lot\nQuantity",
                                     controller: lotQController,
@@ -152,6 +158,32 @@ class _NewItemBoxState extends State<NewItemBox> {
                                     isNumber: true,
                                   ),
                                 ),
+                                Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 30, right: 8 ),
+                                    child: Container(
+                                      height: 30,
+                                      width: 30,
+                                      decoration: BoxDecoration(
+                                        color: Colors.brown[100],
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Align(
+                                        alignment: Alignment.bottomLeft,
+                                        child: Center(
+                                          child: Text(
+                                            "${FoodAndFormatTypes.types[_dropdownKeyType.currentState?.selectedOption]??"??"}",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.brown[800],
+                                                fontSize: 12,
+                                              ),
+                                            ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                )
                               ],
                             ),
                             FormTileDropDown(
@@ -205,14 +237,14 @@ class _NewItemBoxState extends State<NewItemBox> {
   }
 
   void handleSave() {
-    final selecteType = _dropdownKeyType.currentState?.selectedOption;
+    final selectedType = _dropdownKeyType.currentState?.selectedOption;
     final selectedFormat = _dropdownKeyFormat.currentState?.selectedOption;
     Map<String, String> newItemData = {
       'name': nameController.text,
-      'type': selecteType ?? '',
+      'type': selectedType ?? '',
       'price': priceController.text,
       'format': selectedFormat ?? '',
-      'uom': FoodAndFormatTypes.types[selecteType] ?? '',
+      'uom': FoodAndFormatTypes.types[selectedType] ?? '',
       'lotQuantity': lotQController.text
     };
     widget.onSave(newItemData);

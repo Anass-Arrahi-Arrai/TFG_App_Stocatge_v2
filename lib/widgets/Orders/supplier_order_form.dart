@@ -68,6 +68,46 @@ class _SupplierItemsFormState extends State<SupplierItemsForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8.0, top: 5),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      "Items",
+                      style: TextStyle(
+                        color: Colors.brown[800],
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      "Format",
+                      style: TextStyle(
+                        color: Colors.brown[800],
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      "Quantity",
+                      style: TextStyle(
+                        color: Colors.brown[800],
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
+              ),
+            ),
             Expanded(
               flex: 7,
               child: items==null || items.isEmpty ?

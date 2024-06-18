@@ -10,6 +10,7 @@ class FormTile extends StatelessWidget {
   final String dataName;
   final String? Function(String?)? validator;
   final bool isNumber;
+  final bool canWrite;
   
   FormTile({
     super.key, 
@@ -17,6 +18,7 @@ class FormTile extends StatelessWidget {
     required this.controller,
     this.isNumber = false,
     this.validator,
+    this.canWrite = false,
   });
 
   @override
@@ -44,6 +46,7 @@ class FormTile extends StatelessWidget {
                 ),
                 Expanded(
                   child: TextFormField(
+                    readOnly: canWrite,
                     keyboardType: (isNumber)  ? TextInputType.number: null,
                     inputFormatters: (isNumber)  ? [DecimalTextInputFormatter(decimalRange: 2)] : null,
                     validator: validator,

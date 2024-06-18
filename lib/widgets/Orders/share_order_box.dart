@@ -2,6 +2,7 @@
 
 import 'package:app_stocatge/models/order.dart';
 import 'package:app_stocatge/repositories/supplier_repository.dart';
+import 'package:app_stocatge/repositories/user_data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:mailto/mailto.dart';
 import 'package:share_plus/share_plus.dart';
@@ -11,6 +12,7 @@ import 'share_button.dart';
 
 class ShareOrderBox extends StatefulWidget {
   final Order order;
+  final UserRepository uR = UserRepository();
   final SupplierRepository sR = SupplierRepository();
   ShareOrderBox({super.key, required this.order});
 
@@ -27,7 +29,7 @@ class _ShareOrderBoxState extends State<ShareOrderBox> {
     if (method == 'email') {
       final mailtoLink = Mailto(
         to: [mail],
-        subject: 'New Order by (Name of Business)',
+        subject: 'New Order by ${widget.uR.getUser()?.fiscalName}',
         body: orderDetails,
       );
       await launchUrl(Uri.parse(mailtoLink.toString()));

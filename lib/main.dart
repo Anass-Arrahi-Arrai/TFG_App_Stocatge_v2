@@ -2,10 +2,12 @@ import 'package:app_stocatge/models/order.dart';
 import 'package:app_stocatge/models/orderItem.dart';
 import 'package:app_stocatge/models/stockItem.dart';
 import 'package:app_stocatge/models/supplier.dart';
+import 'package:app_stocatge/models/user.dart';
 import 'package:app_stocatge/pages/home_page.dart';
 import 'package:app_stocatge/pages/supplier_manager_page.dart';
 import 'package:app_stocatge/pages/order_page.dart';
 import 'package:app_stocatge/pages/stats_page.dart';
+import 'package:app_stocatge/pages/user_data_page.dart';
 import 'package:app_stocatge/repositories/boxes.dart';
 import 'package:app_stocatge/repositories/item_repository.dart';
 import 'package:app_stocatge/repositories/order_repository.dart';
@@ -26,11 +28,13 @@ void main() async{
   Hive.registerAdapter(OrderAdapter());
   Hive.registerAdapter(OrderItemAdapter());
   Hive.registerAdapter(StockItemAdapter());
+  Hive.registerAdapter(UserAdapter());
 
   boxItems = await Hive.openBox<Item>('itemsBox');
   boxSuppliers = await Hive.openBox<Supplier>('supplierBox');
   boxOrders = await Hive.openBox<Order>('orderBox');
   boxStock = await Hive.openBox<double>('itemStockBox');
+  userBox = await Hive.openBox<User>('userBox');
 
   runApp(MyApp());
 }
@@ -61,6 +65,7 @@ class MyApp extends StatelessWidget {
         '/orders' : (context) => OrdersPage(),
         '/stats' : (context) => StatsPage(),
         '/suppliers' : (context) => SupplierManager(),
+        '/userdata' : (context) => UserDataPage()
       }
     );
   }

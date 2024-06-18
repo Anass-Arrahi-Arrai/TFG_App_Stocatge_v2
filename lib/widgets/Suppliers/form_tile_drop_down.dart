@@ -4,12 +4,14 @@ class FormTileDropDown extends StatefulWidget {
   final String dataName;
   final String? Function(String?)? validator;
   final List<String> options;
+  final Function(String?)? onChanged; 
 
   FormTileDropDown({
     Key? key,
     required this.dataName,
     required this.options,
     this.validator,
+    this.onChanged, 
   }) : super(key: key);
 
   @override
@@ -86,7 +88,9 @@ class FormTileDropDownState extends State<FormTileDropDown> {
                 onChanged: (String? newValue) {
                   setState(() {
                     _selectedOption = newValue;
+                    widget.onChanged!(newValue);
                   });
+                  
                 },
                 validator: widget.validator,
               ),

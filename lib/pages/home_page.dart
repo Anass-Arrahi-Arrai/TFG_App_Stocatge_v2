@@ -1,4 +1,6 @@
 
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:app_stocatge/repositories/order_repository.dart';
 import 'package:flutter/material.dart';
 class HomePage extends StatefulWidget {
@@ -65,7 +67,6 @@ class _HomePageState extends State<HomePage> {
                   GestureDetector( 
                     onTap: () => Navigator.pushNamed(context, '/checkStock'),
                     child: Container(
-                        
                         width: 200,
                         height: 50,
                         decoration: BoxDecoration(
@@ -153,7 +154,6 @@ class _HomePageState extends State<HomePage> {
                   GestureDetector(
                     onTap: () => Navigator.pushNamed(context, '/stats'),
                     child: Container(
-                      
                       height: 50,
                       decoration: BoxDecoration(
                           color: Colors.brown[50],
@@ -184,10 +184,34 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+      floatingActionButton: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              FloatingActionButton(
+                onPressed: () => Navigator.pushNamed(context, '/userdata'),
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.brown,
+                child: Icon(
+                  Icons.person,
+                  size: 40,
+                ),
+              ),
+              SizedBox(height: 4), // Espacio entre el botón y el texto
+              Text(
+                'User Data',
+                style: TextStyle(
+                  color: Colors.brown,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+            ],
+          ),
+        ],
+      )
     );
-  }
-
-  void userTapped() {
-    print("User tapped!");
   }
 }
