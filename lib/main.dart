@@ -19,6 +19,8 @@ import 'package:hive_flutter/adapters.dart';
 
 import 'models/item.dart';
 
+
+final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 void main() async{
   await Hive.initFlutter();
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,6 +38,7 @@ void main() async{
   boxStock = await Hive.openBox<double>('itemStockBox');
   userBox = await Hive.openBox<User>('userBox');
 
+  
   runApp(MyApp());
 }
 void clearAll(){
@@ -59,6 +62,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.brown,
         dialogBackgroundColor: Colors.brown[200],
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.brown,
+          centerTitle: true,
+          elevation: 3,
+          shadowColor: Colors.black,
+          iconTheme: IconThemeData(
+            color: Colors.brown[50]
+          )
+        )
         ),
       routes: {
         '/checkStock' :(context) => CheckStockPage(),
@@ -66,7 +78,8 @@ class MyApp extends StatelessWidget {
         '/stats' : (context) => StatsPage(),
         '/suppliers' : (context) => SupplierManager(),
         '/userdata' : (context) => UserDataPage()
-      }
+      },
+      navigatorObservers: [routeObserver],
     );
   }
 }

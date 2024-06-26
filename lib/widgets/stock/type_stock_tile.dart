@@ -68,7 +68,7 @@ class TypeStockTile extends StatelessWidget {
                       color: Colors.brown[100],
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(
-                        color: Colors.brown,
+                        color: paint(quantity),
                       )),
                   child: Row(
                     children: [
@@ -89,6 +89,8 @@ class TypeStockTile extends StatelessWidget {
                             FoodAndFormatTypes.types[itemType] ?? "",
                             style: TextStyle(
                               fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: paint(quantity)
                             ),
                           ),
                         ),
@@ -124,4 +126,16 @@ class TypeStockTile extends StatelessWidget {
       ),
     );
   }
-}
+
+  Color paint(double quantity) {
+    switch (quantity) {
+      case 0:
+        return Colors.red.shade900;
+      case >0 && <10:
+        return Colors.orange.shade900;
+      case >10:
+        return Colors.brown.shade900;
+      default:
+    }
+    return Colors.brown;
+}}

@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:app_stocatge/models/user.dart';
 import 'package:app_stocatge/repositories/user_data_repository.dart';
 import 'package:app_stocatge/widgets/Suppliers/form_tile.dart';
@@ -5,10 +7,19 @@ import 'package:flutter/material.dart';
 
 import '../my_button.dart';
 
-class EditUserDataBox extends StatelessWidget {
-  EditUserDataBox({super.key});
+class EditUserDataBox extends StatefulWidget {
   
+  EditUserDataBox({super.key, required this.onChanged,});
+  
+  final Function (BuildContext) onChanged;
+
+  @override
+  State<EditUserDataBox> createState() => _EditUserDataBoxState();
+}
+
+class _EditUserDataBoxState extends State<EditUserDataBox> {
   UserRepository uR = UserRepository();
+
   final _formKey = GlobalKey<FormState>();
   final userNameController = TextEditingController();
   final fiscalNameController = TextEditingController();
@@ -17,7 +28,21 @@ class EditUserDataBox extends StatelessWidget {
   final emailController = TextEditingController();
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    User? user = uR.getUser();
+    if (user != null) {
+      userNameController.text = user.userName;
+      fiscalNameController.text = user.fiscalName;
+      nifController.text = user.nif;
+      addressController.text = user.address;
+      emailController.text = user.email;
+    }
+  }
+  @override
   Widget build(BuildContext context) {
+    
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       title: Text(
@@ -63,7 +88,7 @@ class EditUserDataBox extends StatelessWidget {
                       child: Container(
                         width: 500,
                         height: 350,
-                        child: ListView(
+                        child: Column(
                           children: [
                             FormTile(dataName: "User Name", controller: userNameController, validator: validateNotEmpty,),
                             FormTile(dataName: "Fiscal Name", controller: fiscalNameController, validator: validateNotEmpty),
@@ -134,6 +159,8 @@ class EditUserDataBox extends StatelessWidget {
       email: emailController.text, // Asegúrate de guardar el email también
     );
     uR.saveUser(user);
+    widget.onChanged(context);
+    Navigator.of(context).pop();
     
   }
 }

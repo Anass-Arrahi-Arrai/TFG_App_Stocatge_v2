@@ -1,5 +1,7 @@
 
 
+// ignore_for_file: prefer_const_literals_to_create_immutables
+
 import 'package:app_stocatge/repositories/stock_repository.dart';
 import 'package:app_stocatge/widgets/Stock/type_stock_tile.dart';
 import 'package:app_stocatge/widgets/Stock/update_stock_box.dart';
@@ -21,7 +23,7 @@ class _CheckStockPageState extends State<CheckStockPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.brown[25],
+      backgroundColor: Colors.brown[50],
       appBar: AppBar(
         title: const Padding(
           padding: EdgeInsets.only(top: 10),

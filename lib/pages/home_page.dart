@@ -2,6 +2,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:app_stocatge/repositories/order_repository.dart';
+import 'package:app_stocatge/repositories/user_data_repository.dart';
 import 'package:flutter/material.dart';
 class HomePage extends StatefulWidget {
 
@@ -13,9 +14,17 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   OrderRepository orders = OrderRepository();
+  
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setState(() {
+    });
+  }
   @override
   Widget build(BuildContext context) {
-
+    UserRepository uR = UserRepository();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -45,17 +54,28 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               width: 350,
               child: Padding(
-                      padding: const EdgeInsets.only(bottom: 10, left: 10),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "Hello User.",
-                          style: TextStyle(
-                            color: Colors.green,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
+                      padding: const EdgeInsets.only(bottom: 30, left: 10),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Hello",
+                            style: TextStyle(
+                              color: Colors.green,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
                           ),
-                        ),
+                          Text(
+                            "      ${uR.getUser()?.fiscalName}",
+                            style: TextStyle(
+                              color: Colors.green[700],
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
             ),

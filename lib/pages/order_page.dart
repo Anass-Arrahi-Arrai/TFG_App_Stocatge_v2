@@ -41,7 +41,6 @@ class _OrdersPageState extends State<OrdersPage> {
     showDialog(
       context: context, 
       builder: (context) {
-        
         return ShareOrderBox(order: order);
       },
     );
@@ -125,11 +124,10 @@ class _OrdersPageState extends State<OrdersPage> {
   @override
   Widget build(BuildContext context) {
    return Scaffold(
-      backgroundColor: Colors.brown[25],
+      backgroundColor: Colors.brown[50],
       appBar: AppBar(
-        elevation: 0,
         title: const Padding(
-          padding: EdgeInsets.only(top: 10),
+          padding: EdgeInsets.only(top: 1),
           child: Text("Make Order Page",
               style: TextStyle(
                 color: Colors.white,
@@ -137,8 +135,6 @@ class _OrdersPageState extends State<OrdersPage> {
                 fontSize: 15,
               )),
         ),
-        backgroundColor: Colors.brown,
-        centerTitle: true,
       ),
       body: Column(
         children: [

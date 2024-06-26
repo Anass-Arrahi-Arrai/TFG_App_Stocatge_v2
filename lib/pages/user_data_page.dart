@@ -26,10 +26,13 @@ class _UserDataPageState extends State<UserDataPage> {
   @override
   void initState() {
     super.initState();
+    loadData();
+  }
+
+  void loadData() {
     User? user = uR.getUser();
     if (user != null) {
       userNameController.text = user.userName;
-      print(user.fiscalName);
       fiscalNameController.text = user.fiscalName;
       nifController.text = user.nif;
       addressController.text = user.address;
@@ -60,13 +63,23 @@ class _UserDataPageState extends State<UserDataPage> {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "Your Data",
-                style: TextStyle(
-                  color: Colors.brown[800],
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.person,
+                    size:40,
+                    color: Colors.brown[900],
+                  ),
+                  Text(
+                    "Your Data",
+                    style: TextStyle(
+                      color: Colors.brown[800],
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
               ),
             ),
             Padding(
@@ -132,7 +145,9 @@ class _UserDataPageState extends State<UserDataPage> {
                               showDialog(
                                 context: context,
                                 builder: (context) {
-                                  return EditUserDataBox();
+                                  return EditUserDataBox(
+                                    onChanged: (context) {loadData();},
+                                  );
                                 },
                               );
                             },
@@ -177,5 +192,6 @@ class _UserDataPageState extends State<UserDataPage> {
       email: emailController.text,
     );
     uR.saveUser(user);
+    Navigator.of(context).pop();
   }
 }
