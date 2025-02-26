@@ -37,7 +37,7 @@ El proyecto está organizado en los siguientes directorios principales:
 - **`lib/`**: Contiene el código fuente de la aplicación.
   - **`pages/`**: Páginas principales de la aplicación (gestión de inventario, comandas, proveedores, etc.).
   - **`models/`**: Definiciones de los modelos de datos (proveedores, productos, comandas, etc.).
-  - **`repositories/`**: Clases que gestionan las operaciones con la base de dades.
+  - **`repositories/`**: Clases que gestionan las operaciones con la base de datos.
   - **`components/`**: Componentes reutilizables de la interfaz de usuario.
   
 - **`assets/`**: Contiene imágenes, iconos y otros recursos visuales.
